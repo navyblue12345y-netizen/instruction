@@ -1,0 +1,61 @@
+# Content Bot Configuration
+
+groq:
+  api_key: "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"
+  model: "llama-3.3-70b-versatile"
+
+vk:
+  service_token: ""
+
+max:
+  token: "f9LHodD0cOITXuE1vu6eSimAhJUdtmqC00k1Rd10FzHWQwBwK68jPOqfAze4EcRy1jh_5TO04Egv3EXQlWYz"
+  channels:
+    moda: -72476206607781
+    vyazanie: -72517568802213
+    dom: -72517550583205
+
+schedule:
+  timezone: "Europe/Moscow"
+  start_hour: 8
+  end_hour: 22
+  interval_hours: 2
+
+sources:
+  moda:
+    telegram:
+      - "ottenki_glamura"
+      - "odezhda_stil_moda"
+      - "max_krasota"
+      - "moda_blog"
+      - "yourlook_official"
+      - "elyaproshopping"
+      - "FashionGlo"
+      - "ModaMari"
+      - "yanasheller"
+      - "juli_kofe"
+
+  vyazanie:
+    telegram:
+      - "knitideas"
+      - "stilnoe_vjazanie"
+      - "vyazanie_maria"
+      - "lovevjazanie"
+      - "amigurum"
+      - "vyazalruk"
+      - "petelbka"
+      - "hand_knit"
+      - "spize25"
+      - "magicneedle"
+
+  dom:
+    telegram:
+      - "dizain_interero_remont"
+      - "hitrosti_hozyaushki"
+      - "hozaya"
+      - "poleznoe_sow"
+      - "lifehacks_house1"
+      - "haki_chistoty"
+      - "hitrosti_domo"
+      - "laifhakini"
+      - "lifehackf"
+      - "lifehackich"

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "skills": {
+    "github": {
+      "version": "1.0.0",
+      "installedAt": 1774261403475
+    },
+    "skill-vetter": {
+      "version": "1.0.0",
+      "installedAt": 1774265217280
+    },
+    "self-improving": {
+      "version": "1.2.16",
+      "installedAt": 1774440410266
+    },
+    "proactivity": {
+      "version": "1.0.1",
+      "installedAt": 1774440525358
+    },
+    "multi-search-engine": {
+      "version": "2.0.1",
+      "installedAt": 1774533427327
+    }
+  }
+}

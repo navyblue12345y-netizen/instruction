@@ -115,9 +115,39 @@ def report_text(period):
     return fin_report.format_report_text(rep, period, usd_rub)
 
 
+def build_balances_text(items):
+    """items: list of (display_name, remaining_usd, threshold_usd)."""
+    if not items:
+        return "💳 Балансы API: нет данных."
+    out = ["💳 Балансы API:"]
+    for name, rem, thr in items:
+        warn = "  ⚠️ ПОРА ПОПОЛНИТЬ" if rem < thr else ""
+        out.append("• %s: остаток ≈ $%.2f (порог $%.0f)%s" % (name, rem, thr, warn))
+    return "\n".join(out)
+
+
 def balance_text():
-    return build_balance_text(fin_balance.remaining(DB, "anthropic"),
-                              fin_balance.threshold(DB, "anthropic"))
+    import sqlite3 as _sq
+    _conn = _sq.connect(DB, timeout=10)
+    try:
+        provs = [r[0] for r in _conn.execute("SELECT provider FROM api_credits ORDER BY provider")]
+    except Exception:
+        provs = []
+    finally:
+        _conn.close()
+    _alias = {"anthropic": "claude", "deepseek": "deepseek"}
+    _disp = {"anthropic": "Anthropic", "deepseek": "DeepSeek"}
+    items = []
+    for _p in provs:
+        try:
+            items.append((_disp.get(_p, _p),
+                          fin_balance.remaining(DB, _p, claude_alias=_alias.get(_p, _p)),
+                          fin_balance.threshold(DB, _p)))
+        except Exception:
+            pass
+    if not items:
+        return build_balance_text(fin_balance.remaining(DB, "anthropic"), fin_balance.threshold(DB, "anthropic"))
+    return build_balances_text(items)
 
 
 def notification_text(item):

@@ -73,7 +73,8 @@ def _has_credits_row(db_path, provider):
         conn.close()
 
 
-def due_today(db_path, today, provider="anthropic", daily_cap_usd=None):
+def due_today(db_path, today, provider="anthropic", daily_cap_usd=None,
+              now_utc_hour=None, daily_report_hour=None):
     """Список уведомлений на сегодня (ещё не отправленных). Каждый — dict с 'kind'/'key'."""
     items = []
     # 1) Ежемесячный отчёт 1-го числа (за прошлый месяц)
@@ -97,6 +98,10 @@ def due_today(db_path, today, provider="anthropic", daily_cap_usd=None):
         _spend = today_spend_usd(db_path, today)
         if _spend > float(daily_cap_usd):
             items.append({"kind": "daily_cost", "key": today, "spend": _spend, "cap": float(daily_cap_usd)})
+    # 5) Ежедневный отчёт расхода в группу (раз в день, после daily_report_hour UTC)
+    if daily_report_hour is not None and now_utc_hour is not None and int(now_utc_hour) >= int(daily_report_hour):
+        items.append({"kind": "daily_summary", "key": today, "day": today,
+                      "spend": today_spend_usd(db_path, today)})
     # фильтр уже отправленных сегодня
     return [it for it in items if not already_sent(db_path, it["kind"], it["key"], today)]
 

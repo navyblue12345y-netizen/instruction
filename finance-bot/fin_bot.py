@@ -25,8 +25,30 @@ import fin_scheduler
 TOKEN = os.environ.get("FINANCE_BOT_TOKEN", "")
 CHAT_ID = os.environ.get("FINANCE_CHAT_ID", "-1004292579780")
 DAILY_CAP = float(os.environ.get("FINANCE_DAILY_CAP", "0") or 0)
+DAILY_REPORT_HOUR = int(os.environ.get("FINANCE_DAILY_REPORT_HOUR_UTC", "20") or 20)
 DB = cost_log.FINANCE_DB
 _API = "https://api.telegram.org/bot%s/%s"
+
+
+def _parse_allowed(raw):
+    """'111, 222,333' -> {111,222,333}. Пусто -> пустое множество (никого)."""
+    out = set()
+    for x in (raw or "").replace(" ", "").split(","):
+        x = x.strip()
+        if x and x.lstrip("-").isdigit():
+            out.add(int(x))
+    return out
+
+
+ALLOWED_USERS = _parse_allowed(os.environ.get("FINANCE_ALLOWED_USERS", ""))
+
+
+def is_allowed(user_id):
+    """Доступ к интерактиву (меню/отчёты/команды) — только у этих user_id в ЛС."""
+    try:
+        return int(user_id) in ALLOWED_USERS
+    except Exception:
+        return False
 
 
 # ---------------- pure builders (tested) ----------------
@@ -45,16 +67,9 @@ SECTION_TITLES = {"month": "📊 За месяц", "today": "📅 Сегодня
                   "subs": "🧾 Подписки", "balance": "💳 Баланс", "topup": "➕ Пополнить"}
 
 
-def build_section_nav(key):
-    """Навигация между разделами: ◀ предыдущий · 🏠 меню · следующий ▶ (карусель)."""
-    i = SECTION_KEYS.index(key)
-    prev_k = SECTION_KEYS[(i - 1) % len(SECTION_KEYS)]
-    next_k = SECTION_KEYS[(i + 1) % len(SECTION_KEYS)]
-    return {"inline_keyboard": [[
-        {"text": "◀", "callback_data": "sec:" + prev_k},
-        {"text": "🏠 Меню", "callback_data": "menu"},
-        {"text": "▶", "callback_data": "sec:" + next_k},
-    ]]}
+def build_section_nav(key=None):
+    """Одна кнопка возврата в главное меню (действие, без карусели по разделам)."""
+    return {"inline_keyboard": [[{"text": "◀ В меню", "callback_data": "menu"}]]}
 
 
 def _fmt_amt(a):
@@ -160,6 +175,8 @@ def notification_text(item):
         return balance_text()
     if k == "daily_cost":
         return "⚠️ Дневной расход LLM ${:.2f} превысил потолок ${:.2f}".format(item.get("spend", 0), item.get("cap", 0))
+    if k == "daily_summary":
+        return "📅 Расходы за день %s:\n\n%s" % (item.get("day"), report_text(item.get("day")))
     return ""
 
 
@@ -234,7 +251,9 @@ def _scheduler_loop():  # pragma: no cover
     while True:
         try:
             today = _today_iso()
-            for it in fin_scheduler.due_today(DB, today, daily_cap_usd=(DAILY_CAP or None)):
+            now_h = datetime.now(timezone.utc).hour
+            for it in fin_scheduler.due_today(DB, today, daily_cap_usd=(DAILY_CAP or None),
+                                              now_utc_hour=now_h, daily_report_hour=DAILY_REPORT_HOUR):
                 send_message(CHAT_ID, notification_text(it))
                 fin_scheduler.mark_sent(DB, it["kind"], it["key"], today)
             fin_scheduler.roll_passed_subs(DB, today)
@@ -247,7 +266,8 @@ def main():  # pragma: no cover
     if not TOKEN:
         raise SystemExit("FINANCE_BOT_TOKEN не задан в env")
     threading.Thread(target=_scheduler_loop, name="fin-scheduler", daemon=True).start()
-    send_message(CHAT_ID, "Финбот запущен.", reply_markup=build_main_menu())
+    # В группу стартовое меню НЕ шлём: группа = только уведомления.
+    # Интерактив (меню/отчёты/команды) — только в ЛС у разрешённых юзеров.
     offset = None
     while True:
         resp = _api("getUpdates", offset=offset, timeout=50)
@@ -259,10 +279,23 @@ def main():  # pragma: no cover
             if "callback_query" in upd:
                 cq = upd["callback_query"]
                 _api("answerCallbackQuery", callback_query_id=cq["id"])
-                _handle_callback(cq.get("data", ""), cq["message"]["chat"]["id"],
-                                 cq["message"]["message_id"])
+                msg = cq.get("message") or {}
+                chat = msg.get("chat") or {}
+                uid = (cq.get("from") or {}).get("id")
+                if chat.get("type") != "private" or not is_allowed(uid):
+                    continue
+                _handle_callback(cq.get("data", ""), chat.get("id"), msg.get("message_id"))
             elif "message" in upd and "text" in upd["message"]:
-                _handle_text(upd["message"]["text"], upd["message"]["chat"]["id"])
+                m = upd["message"]
+                chat = m.get("chat") or {}
+                uid = (m.get("from") or {}).get("id")
+                if chat.get("type") != "private":
+                    continue  # в группах на команды/кнопки не реагируем
+                if not is_allowed(uid):
+                    send_message(chat.get("id"),
+                                 "⛔ Нет доступа к финботу.\nВаш ID: %s\nПередайте его администратору." % uid)
+                    continue
+                _handle_text(m["text"], chat.get("id"))
 
 
 if __name__ == "__main__":  # pragma: no cover

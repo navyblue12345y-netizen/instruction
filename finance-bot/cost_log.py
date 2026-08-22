@@ -23,7 +23,7 @@ PRICING = {
     ("claude", "claude-sonnet-4-5"): {"in": 3.0, "out": 15.0, "cache_write_x": 1.25, "cache_read_x": 0.10},
     ("claude", "claude-haiku-4-5"): {"in": 1.0, "out": 5.0, "cache_write_x": 1.25, "cache_read_x": 0.10},
     ("groq", "llama-3.3-70b-versatile"): {"in": 0.59, "out": 0.79, "cache_write_x": 0.0, "cache_read_x": 0.0},
-    ("deepseek", "deepseek-chat"): {"in": 0.27, "out": 1.10, "cache_write_x": 0.0, "cache_read_x": 0.0},
+    ("deepseek", "deepseek-chat"): {"in": 0.14, "out": 0.28, "cache_write_x": 0.0, "cache_read_x": 0.02},
 }
 DEFAULT_PRICE = {"in": 1.0, "out": 5.0, "cache_write_x": 1.25, "cache_read_x": 0.10}
 

@@ -49,7 +49,8 @@ def _load_active_subs(db_path):
     conn.row_factory = sqlite3.Row
     try:
         return [dict(r) for r in conn.execute(
-            "SELECT name, next_due, notify_days_before FROM subscriptions WHERE active=1").fetchall()]
+            "SELECT name, next_due, notify_days_before, account_email, amount, currency "
+            "FROM subscriptions WHERE active=1").fetchall()]
     finally:
         conn.close()
 
@@ -73,6 +74,18 @@ def _has_credits_row(db_path, provider):
         conn.close()
 
 
+def _fallback_used_today(db_path, day):
+    """True, если сегодня был расход с резервного Anthropic-ключа (provider='claude_fb')
+    = основной баланс исчерпан, работаем на резерве."""
+    conn = sqlite3.connect(_db(db_path), timeout=10)
+    try:
+        return conn.execute(
+            "SELECT 1 FROM llm_usage WHERE provider='claude_fb' AND substr(ts_utc,1,10)=? LIMIT 1",
+            (day,)).fetchone() is not None
+    finally:
+        conn.close()
+
+
 def due_today(db_path, today, provider="anthropic", daily_cap_usd=None,
               now_utc_hour=None, daily_report_hour=None):
     """Список уведомлений на сегодня (ещё не отправленных). Каждый — dict с 'kind'/'key'."""
@@ -88,11 +101,27 @@ def due_today(db_path, today, provider="anthropic", daily_cap_usd=None,
             "sub": sub, "days": days,
         })
     # 3) Низкий баланс API — раздельно по провайдерам (свой баланс у каждого)
-    for _prov, _alias in (("anthropic", "claude"), ("deepseek", "deepseek")):
-        if not _has_credits_row(db_path, _prov):
+    # openai-fin-2026-08-18: perebiraem VSE stroki api_credits (a ne dva zashitykh
+    # providera) i propuskaem zamorozhennye (anthropic — dostup zakryt, ne dengi).
+    import fin_sheets as _fs
+    _frozen = getattr(_fs, "FROZEN_PROVIDERS", set())
+    _conn_p = sqlite3.connect(db_path, timeout=10)
+    try:
+        _provs = [r[0] for r in _conn_p.execute(
+            "SELECT provider FROM api_credits ORDER BY provider")]
+    except Exception:
+        _provs = []
+    finally:
+        _conn_p.close()
+    for _prov in _provs:
+        if _prov in _frozen:
             continue
+        _alias = _fs.PROVIDER_ALIAS.get(_prov, _prov)
         if fin_balance.is_low(db_path, _prov, claude_alias=_alias):
             items.append({"kind": "low_balance", "key": "%s|%s" % (_prov, today), "provider": _prov})
+    # 3b) Переключение на резервный Anthropic-ключ (основной исчерпан) — раз в день
+    if _fallback_used_today(db_path, today):
+        items.append({"kind": "fallback_active", "key": today})
     # 4) Дневной потолок расхода LLM
     if daily_cap_usd:
         _spend = today_spend_usd(db_path, today)
@@ -113,7 +142,7 @@ def roll_passed_subs(db_path, today):
     conn.row_factory = sqlite3.Row
     n = 0
     try:
-        for r in conn.execute("SELECT rowid, next_due FROM subscriptions WHERE active=1").fetchall():
+        for r in conn.execute("SELECT id, next_due FROM subscriptions WHERE active=1").fetchall():
             new = r["next_due"]
             while True:
                 rolled = fin_subs.roll_if_passed(new, today)
@@ -121,7 +150,7 @@ def roll_passed_subs(db_path, today):
                     break
                 new = rolled
             if new != r["next_due"]:
-                conn.execute("UPDATE subscriptions SET next_due=? WHERE rowid=?", (new, r["rowid"]))
+                conn.execute("UPDATE subscriptions SET next_due=? WHERE id=?", (new, r["id"]))
                 n += 1
         conn.commit()
     finally:

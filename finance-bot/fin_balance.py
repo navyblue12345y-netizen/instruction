@@ -12,15 +12,24 @@ def _db(db_path):
     return db_path or cost_log.FINANCE_DB
 
 
-def remaining(db_path, provider, claude_alias="claude") -> float:
+def remaining(db_path, provider, claude_alias="claude", fresh_secs=5400) -> float:
     conn = sqlite3.connect(_db(db_path), timeout=10)
     try:
         row = conn.execute(
-            "SELECT topped_up_usd, as_of FROM api_credits WHERE provider=?",
+            "SELECT topped_up_usd, as_of, provider_balance_usd, provider_balance_at"
+            " FROM api_credits WHERE provider=?",
             (provider,)).fetchone()
         if not row:
             return 0.0
-        topped, as_of = row
+        topped, as_of, pbal, pat = row
+        if pbal is not None and pat:
+            from datetime import datetime, timezone
+            try:
+                age = (datetime.now(timezone.utc) - datetime.fromisoformat(pat)).total_seconds()
+                if age < fresh_secs:
+                    return float(pbal)
+            except Exception:
+                pass
         spend = conn.execute(
             "SELECT COALESCE(SUM(cost_usd), 0) FROM llm_usage WHERE provider=? AND ts_utc >= ?",
             (claude_alias, as_of)).fetchone()[0] or 0.0
@@ -44,11 +53,17 @@ def is_low(db_path, provider, claude_alias="claude") -> bool:
 
 
 def add_topup(db_path, provider, amount_usd) -> None:
+    """openai-fin-2026-08-18: ranshe UPDATE po neizvestnomu provideru molcha
+    nichego ne delal — polzovatel videl 'ok', a summa nikuda ne popadala."""
     conn = sqlite3.connect(_db(db_path), timeout=10)
     try:
-        conn.execute(
+        cur = conn.execute(
             "UPDATE api_credits SET topped_up_usd = topped_up_usd + ? WHERE provider=?",
             (float(amount_usd), provider))
+        if cur.rowcount == 0:
+            known = [r[0] for r in conn.execute(
+                "SELECT provider FROM api_credits ORDER BY provider")]
+            raise ValueError("neizvestny provider %r; est: %s" % (provider, ", ".join(known)))
         conn.commit()
     finally:
         conn.close()

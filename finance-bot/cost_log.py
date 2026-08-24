@@ -23,7 +23,8 @@ PRICING = {
     ("claude", "claude-sonnet-4-5"): {"in": 3.0, "out": 15.0, "cache_write_x": 1.25, "cache_read_x": 0.10},
     ("claude", "claude-haiku-4-5"): {"in": 1.0, "out": 5.0, "cache_write_x": 1.25, "cache_read_x": 0.10},
     ("groq", "llama-3.3-70b-versatile"): {"in": 0.59, "out": 0.79, "cache_write_x": 0.0, "cache_read_x": 0.0},
-    ("deepseek", "deepseek-chat"): {"in": 0.14, "out": 0.28, "cache_write_x": 0.0, "cache_read_x": 0.02},
+    ("deepseek", "deepseek-chat"): {"in": 0.22, "out": 0.66, "cache_write_x": 0.0, "cache_read_x": 0.007 / 0.22},
+    ("deepseek", "deepseek-v4-flash"): {"in": 0.22, "out": 0.66, "cache_write_x": 0.0, "cache_read_x": 0.007 / 0.22},
 }
 DEFAULT_PRICE = {"in": 1.0, "out": 5.0, "cache_write_x": 1.25, "cache_read_x": 0.10}
 
@@ -55,7 +56,19 @@ def classify(channel_key: str) -> str:
     return "lajv"  # _lajv, _lajv_*, _laj, naberezhnye_cheln, rostov_na_donu_2, ...
 
 
-def cost_usd(provider, model, in_tok, out_tok, cache_write=0, cache_read=0) -> float:
+def _deepseek_is_peak(when=None) -> bool:
+    """Пиковый тариф DeepSeek: будни 01:00-04:00 и 06:00-10:00 UTC.
+
+    Вне этих окон и в выходные действует скидка 50%, поэтому в PRICING
+    записана СКИДОЧНАЯ цена, а в пик стоимость умножается на 2."""
+    d = when or datetime.now(timezone.utc)
+    if d.weekday() >= 5:
+        return False
+    return 1 <= d.hour < 4 or 6 <= d.hour < 10
+
+
+def cost_usd(provider, model, in_tok, out_tok, cache_write=0, cache_read=0,
+             when=None) -> float:
     """Стоимость одного вызова в USD.
 
     ВАЖНО: у Anthropic `input_tokens` уже БЕЗ кэш-токенов — cache_creation /
@@ -71,10 +84,13 @@ def cost_usd(provider, model, in_tok, out_tok, cache_write=0, cache_read=0) -> f
     out_tok = out_tok or 0
     cache_write = cache_write or 0
     cache_read = cache_read or 0
-    return (in_tok * p["in"]
-            + cache_write * p["in"] * p["cache_write_x"]
-            + cache_read * p["in"] * p["cache_read_x"]
-            + out_tok * p["out"]) / 1e6
+    total = (in_tok * p["in"]
+             + cache_write * p["in"] * p["cache_write_x"]
+             + cache_read * p["in"] * p["cache_read_x"]
+             + out_tok * p["out"]) / 1e6
+    if provider == "deepseek" and _deepseek_is_peak(when):
+        total *= 2.0
+    return total
 
 
 MODEL_BY_PROVIDER = {

@@ -7366,3 +7366,34 @@ media_min_side: 150
 source_media_crop:
   hand_knit:
     bottom_pct: 12
+
+# --- Уведомления об опасности БПЛА (тестовое включение 24.08) ---------------
+# 20 каналов на обкатку; выключить = enabled: false (без рестарта, конфиг
+# перечитывается каждый тик). Полная сетка = убрать channels.
+bpla_alerts:
+  enabled: true
+  interval_seconds: 25
+  min_gap_minutes: 20        # события одного канала не чаще раза в 20 минут
+  quiet_minutes: 60          # час тишины после рекламы (требование 24.08)
+  own_post_gap_minutes: 5    # пауза после ОБЫЧНОГО поста канала (24.08)
+  channels:
+    - belgorod_lajv_belgorodskaya_oblast
+    - bryansk_lajv
+    - kursk_lajv_kurskaya_oblast
+    - voronezh_lajv
+    - taganrog_lajv
+    - krasnodar_lajv
+    - volgograd_lajv_volgogradskaya_oblast
+    - saratov_i_engels_lajv
+    - ryazan_lajv
+    - tula_lajv_tulskaya_oblast
+    - belgorod_v_max
+    - bryansk_v_max
+    - kursk_i_oblast_v_max
+    - voronezh_v_max
+    - rostov_na_donu_v_max
+    - krasnodar_v_max
+    - volgograd_v_max
+    - saratov_i_engels_v_max
+    - ryazan_v_max
+    - tula_v_max

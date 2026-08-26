@@ -3079,6 +3079,8 @@ sources:
     - mkVyazanie
     - leytuvyjuj4
     - kopilka_uzorov
+    - knit_forever
+    - knitting_is_the_meaning_of_life
   nash_dom: {}
   masterskaya_vyaza: {}
   dachniki: {}
@@ -3108,6 +3110,8 @@ sources:
     - mkVyazanie
     - leytuvyjuj4
     - kopilka_uzorov
+    - knit_forever
+    - knitting_is_the_meaning_of_life
   dachniki_2:
     telegram:
     - dacha_ogorod
@@ -6835,6 +6839,32 @@ channel_settings:
     enabled: true
     media_mode: any
     rewrite: true
+  hand_knit:
+    fetch_pages: 8
+  hand_sewing:
+    fetch_pages: 8
+  knit_forever:
+    fetch_pages: 8
+  knitting_is_the_meaning_of_life:
+    fetch_pages: 8
+  kopilka_uzorov:
+    fetch_pages: 8
+  leytuvyjuj4:
+    fetch_pages: 8
+  lovevjazanie:
+    fetch_pages: 8
+  mkVyazanie:
+    fetch_pages: 8
+  petelbka:
+    fetch_pages: 8
+  spize25:
+    fetch_pages: 8
+  stilnoe_vjazanie:
+    fetch_pages: 8
+  vyazalruk:
+    fetch_pages: 8
+  vyazanie_maria:
+    fetch_pages: 8
 disabled_channels:
 - skhemy_vyazaniya_rukodelie
 - moda
@@ -7397,3 +7427,75 @@ bpla_alerts:
     - saratov_i_engels_v_max
     - ryazan_v_max
     - tula_v_max
+    - oryol_lajv
+    - lipetsk_lajv_lipetskaya_oblast
+    - tambov_lajv_tambovskaya_oblast
+    - novorossijsk_lajv
+    - sochi_lajv
+    - krym_lajv
+    - majkop_lajv_respublika_adygeya
+    - stavropol_lajv
+    - volzhskij_lajv
+    - astrakhan_lajv
+    - penza_lajv_penzenskaya_oblast
+    - kaluga_lajv_k
+    - moskva_lajv_moskovskaya_oblast
+    - podolsk_lajv
+    - balashikha_lajv
+    - tver_lajv_tverskaya_oblast
+    - vladimir_lajv
+    - yaroslavl_lajv
+    - ivanovo_lajv
+    - kostroma_lajv
+    - nizhnij_novgorod_lajv
+    - tolyatti_lajv
+    - samara_lajv
+    - ulyanovsk_lajv_ulyanovskaya_oblast
+    - cheboksary_lajv
+    - saransk_lajv
+    - kazan_lajv
+    - nizhnekamsk_lajv
+    - joshkar_ola_lajv_respublika_marij_el
+    - sankt_peterburg_lajv_leningradskaya_obla
+    - pskov_lajv_pskovskaya_oblast
+    - velikij_novgorod_lajv
+    - murmansk_lajv
+    - ufa_lajv
+    - izhevsk_lajv
+    - kirov_lajv
+    - gubkin_v_max
+    - staryj_oskol_v_max
+    - zheleznogorsk_v_max
+    - doneck_v_max
+    - orel_v_max
+    - batajsk_v_max
+    - volgodonsk_v_max
+    - novocherkassk_v_max
+    - taganrog_v_max
+    - shakhty_v_max
+    - lipeck_v_max
+    - elec_v_max
+    - tambov_v_max
+    - armavir_v_max
+    - novorossijsk_v_max
+    - sochi_v_max
+    - krym_v_max
+    - sevastopol_v_max
+    - majkop_v_max
+    - stavropol_v_max
+    - pyatigorsk_v_max
+    - kislovodsk_v_max
+    - essentuki_v_max
+    - nevinnomyssk_v_max
+    - mikhajlovsk_v_max
+    - volzhskij_v_max
+    - kamyshin_v_max
+    - astrakhan_v_max
+    - balakovo_v_max
+    - penza_i_oblast_v_max
+    - kaluga_v_max
+    - obninsk_v_max
+    - moskva_v_max
+    - balashikha_v_max
+    - krasnogorsk_v_max
+    - mytischi_v_max

@@ -25,6 +25,48 @@ _AE_DB_PATH = os.path.join(
 )
 
 
+_VIDEO_UPLOAD_MAX_MB = 16   # ~100 с при 0.16 МБ/с — влезает в таймаут с запасом
+
+
+def _shrink_video_for_upload(path, max_mb=_VIDEO_UPLOAD_MAX_MB):
+    """(путь_для_заливки, is_temp). Крупнее порога — жмём ffmpeg'ом до 540p.
+
+    26.08: заливка в MAX идёт ~0.16 МБ/с, и всё крупнее ~19 МБ стабильно
+    умирало таймаутом (3 попытки × 2 мин, потеря поста). Замер: 34 МБ → 8 МБ
+    за ~28 с, после чего заливка прошла с первого раза. При ЛЮБОЙ ошибке
+    сжатия шлём оригинал — поведение не хуже прежнего.
+    """
+    import subprocess
+    import tempfile
+    try:
+        mb = os.path.getsize(path) / 1048576.0
+    except OSError:
+        return path, False
+    if mb <= max_mb:
+        return path, False
+    out = tempfile.mktemp(suffix=".mp4")
+    try:
+        r = subprocess.run(
+            ["ffmpeg", "-y", "-i", path, "-vf", "scale='min(540,iw)':-2",
+             "-c:v", "libx264", "-preset", "veryfast", "-crf", "27",
+             "-c:a", "aac", "-b:a", "96k", "-movflags", "+faststart", out],
+            capture_output=True, timeout=240)
+        if r.returncode == 0 and os.path.exists(out) and os.path.getsize(out) > 0:
+            logger.info("видео сжато для заливки: %.0f -> %.0f МБ",
+                        mb, os.path.getsize(out) / 1048576.0)
+            return out, True
+        logger.warning("ffmpeg не сжал (%s), шлю оригинал %.0f МБ",
+                       (r.stderr or b"")[-120:], mb)
+    except Exception as e:
+        logger.warning("сжатие видео не удалось (%r), шлю оригинал %.0f МБ", e, mb)
+    try:
+        if os.path.exists(out):
+            os.unlink(out)
+    except OSError:
+        pass
+    return path, False
+
+
 def _ae_conn() -> sqlite3.Connection:
     """Connection к БД для AUTO-EDIT очереди. WAL уже включён глобально через db.py.
     Здесь не делаем PRAGMA — только что используем тот же файл."""
@@ -237,8 +279,20 @@ class MaxPublisher:
 
             # Для видео — multipart upload
             if upload_type == "video":
-                files = {"data": (os.path.basename(file_path), file_content, "video/mp4")}
-                resp = httpx.post(upload_url, files=files, timeout=120)
+                # 26.08: крупное видео не влезало в таймаут — жмём перед отправкой
+                _up_path, _shrunk = _shrink_video_for_upload(file_path)
+                if _shrunk:
+                    with open(_up_path, "rb") as _fv:
+                        file_content = _fv.read()
+                try:
+                    files = {"data": (os.path.basename(file_path), file_content, "video/mp4")}
+                    resp = httpx.post(upload_url, files=files, timeout=300)
+                finally:
+                    if _shrunk and os.path.exists(_up_path):
+                        try:
+                            os.unlink(_up_path)
+                        except OSError:
+                            pass
             else:
                 # Для фото — выбираем mime по реальному расширению
                 _ext_lower = os.path.splitext(file_path)[1].lower()

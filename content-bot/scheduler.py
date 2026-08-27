@@ -413,7 +413,10 @@ def _publish_channel(niche: str, channel_id: int, publisher: MaxPublisher,
 
     published = False
     for _ in range(15):
-        post = db.claim_pending_post(niche, media_type_filter)
+        # 26.08: вязанию видео важнее фото — из очереди сначала видео
+        _vf = bool((load_config().get("channel_settings", {}) or {})
+                   .get(niche, {}).get("video_first"))
+        post = db.claim_pending_post(niche, media_type_filter, video_first=_vf)
         if not post:
             logger.info(f"[{niche}] Очередь пуста — пропускаем слот")
             break

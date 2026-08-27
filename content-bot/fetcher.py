@@ -29,6 +29,21 @@ from sources import telegram
 logger = logging.getLogger(__name__)
 
 
+def _effective_fetch_filter(ch_cfg, grid_filter):
+    """Фильтр ДОБОРА, отдельно от фильтра публикации.
+
+    26.08: вязанию добавили видео-доноров, а видео так и не пришли — добор
+    наполняется с первых источников списка, и фото-доноры съедают лимит.
+    fetch_media_mode сужает именно сбор (например до video), не трогая
+    публикацию: фото из очереди остаются подушкой, слоты не горят.
+    """
+    fm = (ch_cfg or {}).get("fetch_media_mode")
+    if fm and fm != "any":
+        return fm
+    ch_media = (ch_cfg or {}).get("media_mode")
+    return ch_media if ch_media and ch_media != "any" else grid_filter
+
+
 def _is_skip_marker_text(text: str) -> bool:
     t = (text or "").strip().lower()
     if not t:
@@ -498,8 +513,7 @@ def fetch_grid(config: dict, grid_name: str) -> int:
 
         # Настройка медиа: канал → сетка (канал имеет приоритет)
         ch_cfg = channel_settings.get(niche, {}) or {}
-        ch_media = ch_cfg.get("media_mode")
-        effective_filter = ch_media if ch_media and ch_media != "any" else media_type_filter
+        effective_filter = _effective_fetch_filter(ch_cfg, media_type_filter)
         ch_prompt = (ch_cfg.get("rewrite_prompt") or "").strip()
 
         added = 0
@@ -639,8 +653,7 @@ def fetch_channel(config: dict, niche: str, limit: int | None = None, grid_name:
 
     channel_settings = config.get("channel_settings", {}) or {}
     ch_cfg = channel_settings.get(niche, {}) or {}
-    ch_media = ch_cfg.get("media_mode")
-    effective_filter = ch_media if ch_media and ch_media != "any" else media_type_filter
+    effective_filter = _effective_fetch_filter(ch_cfg, media_type_filter)
     ch_prompt = (ch_cfg.get("rewrite_prompt") or "").strip()
 
     added = 0

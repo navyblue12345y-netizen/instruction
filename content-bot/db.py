@@ -585,7 +585,8 @@ def _sibling_channels(channel: str) -> tuple[list, int]:
     return [], 0
 
 
-def claim_pending_post(channel: str, media_type_filter: str = "any") -> dict | None:
+def claim_pending_post(channel: str, media_type_filter: str = "any",
+                       video_first: bool = False) -> dict | None:
     """
     Атомарно забирает один pending-пост в processing, чтобы второй процесс его не взял.
 
@@ -614,7 +615,7 @@ def claim_pending_post(channel: str, media_type_filter: str = "any") -> dict | N
             f"""
             SELECT * FROM posts
             WHERE channel=? AND status='pending' {media_filter}
-            ORDER BY datetime(created_at) ASC
+            ORDER BY {"(CASE WHEN media_type='video' THEN 0 ELSE 1 END), " if video_first else ""}datetime(created_at) ASC
             LIMIT 20
             """,
             (channel,),

@@ -400,9 +400,21 @@ def _publish_ad_if_due(channel_id: int, ad_row: dict, publisher: MaxPublisher) -
     return False
 
 
+_RESCUE_LAST = {}                  # niche -> монотонное время последнего добора
+_RESCUE_COOLDOWN_SEC = 600         # пустой донорский день не должен превращать
+                                   # каждый слот в многоминутный фетч
+
+
 def _publish_channel(niche: str, channel_id: int, publisher: MaxPublisher,
-                     media_type_filter: str = "any", defer_cb=None):
-    """Публикует 1 пост для канала. Возвращает True если опубликовано."""
+                     media_type_filter: str = "any", defer_cb=None,
+                     rescue_fetch=None):
+    """Публикует 1 пост для канала. Возвращает True если опубликовано.
+
+    rescue_fetch (27.08): спасательный добор канала. Слот 21:00 dachniki_2
+    сгорел при «полной» очереди — добор принёс одни text_hash-дубли, счётчик
+    _pending_count считал их живыми (sync-ветка молчала), а claim молча
+    выбраковал. Теперь провал перебора сам зовёт добор и пробует ещё раз.
+    """
     from fetcher import _matches_stopwords, _matches_regex_block, _matches_profanity
 
     # Атомарная защита: 1 канал = 1 пост в слот (через SQL INSERT OR IGNORE)
@@ -537,6 +549,22 @@ def _publish_channel(niche: str, channel_id: int, publisher: MaxPublisher,
             db.mark_skipped(post["id"], reason="max_api_error")
             logger.warning(f"[{niche}] ❌ Пост #{post['id']} не прошёл, пробуем следующий")
 
+    if not published and rescue_fetch is not None:
+        now_mono = time.monotonic()
+        last = _RESCUE_LAST.get(niche)
+        if last is not None and (now_mono - last) < _RESCUE_COOLDOWN_SEC:
+            logger.info(f"[{niche}] спасательный добор пропущен (кулдаун)")
+        else:
+            _RESCUE_LAST[niche] = now_mono
+            logger.info(f"[{niche}] кандидаты кончились — спасательный добор в слоте")
+            try:
+                rescue_fetch()
+            except Exception as _rf_e:
+                logger.warning(f"[{niche}] спасательный добор упал: {_rf_e}")
+            db.release_slot(niche, slot_key)   # вернуть слот перед второй попыткой
+            return _publish_channel(niche, channel_id, publisher,
+                                    media_type_filter, defer_cb=defer_cb,
+                                    rescue_fetch=None)
     if not published:
         logger.warning(f"[{niche}] Все попытки исчерпаны, слот пропущен")
         db.release_slot(niche, slot_key)  # освобождаем слот если не опубликовали
@@ -636,8 +664,10 @@ def _schedule_shifted_publish(scheduler, grid_name: str, niche: str, channel_id:
                 channel_id=int(channel_id), media_type_filter=media_type_filter,
                 run_at_local=_ra, tz_name=tz_name)
 
+        def _rescue_shifted():
+            _fetch_on_demand(config, grid_name, niche)
         _publish_channel(niche, int(channel_id), publisher, media_type_filter,
-                         defer_cb=_redefer)
+                         defer_cb=_redefer, rescue_fetch=_rescue_shifted)
 
     from apscheduler.triggers.date import DateTrigger
     try:
@@ -866,8 +896,10 @@ def make_grid_post_batch(grid_name: str, scheduler=None):
                     channel_id=int(_cid), media_type_filter=_f,
                     run_at_local=_ra, tz_name=settings["timezone"])
 
+            def _rescue(_n=niche):
+                _fetch_on_demand(config, grid_name, _n)
             if _publish_channel(niche, int(channel_id), publisher, effective_filter,
-                                defer_cb=_defer_race):
+                                defer_cb=_defer_race, rescue_fetch=_rescue):
                 published_count += 1
 
         logger.info(f"[{grid_name}] Слот: опубликовано {published_count} постов")
@@ -1248,7 +1280,10 @@ def make_grid_live_fetch(grid_name: str):
             ch_media = channel_settings.get(niche, {}).get("media_mode")
             effective_filter = ch_media if ch_media and ch_media != "any" else media_type_filter
             # В живом режиме публикуем не более 1 поста на канал за цикл
-            if _publish_channel(niche, int(channel_id), publisher, effective_filter):
+            def _rescue_live(_n=niche):
+                _fetch_on_demand(config, grid_name, _n)
+            if _publish_channel(niche, int(channel_id), publisher, effective_filter,
+                                rescue_fetch=_rescue_live):
                 published_count += 1
 
         if published_count:

@@ -5325,7 +5325,8 @@ channel_settings:
     media_mode: any
     rewrite: true
   skhemy_vyazaniya_3:
-    fetch_media_mode: video
+    # 01.09: жёсткий видео-фильтр сбора снят — у доноров свежих видео 0,
+    # фото 59, канал вставал. Приоритет видео держит video_first.
     video_first: true
     fetch_pages: 8   # 28.07: близнецам нужен архив доноров (sibling-дедуп их разводит); остальным Дача-каналам глубина 3
     media_mode: require_media
@@ -5484,7 +5485,8 @@ channel_settings:
       url: https://max.ru/join/cUAA093GtFkOsGNHvyJ5-Ffxg530Z8ogZHmutjEDiIg
       style: markdown
   masterskaya_vyaza_2:
-    fetch_media_mode: video
+    # 01.09: жёсткий видео-фильтр сбора снят — у доноров свежих видео 0,
+    # фото 59, канал вставал. Приоритет видео держит video_first.
     video_first: true
     fetch_pages: 8   # 28.07: близнецам нужен архив доноров (sibling-дедуп их разводит); остальным Дача-каналам глубина 3
     media_mode: require_media

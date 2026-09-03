@@ -3081,6 +3081,10 @@ sources:
     - kopilka_uzorov
     - knit_forever
     - knitting_is_the_meaning_of_life
+    # 02.09: MAX-каналы через юзербота — у телеграм-доноров видео
+    # кончились, а «Секреты Спиц» берут видео именно отсюда
+    - mx:-68806745298320
+    - mx:-71924502338122
   nash_dom: {}
   masterskaya_vyaza: {}
   dachniki: {}
@@ -3112,6 +3116,10 @@ sources:
     - kopilka_uzorov
     - knit_forever
     - knitting_is_the_meaning_of_life
+    # 02.09: MAX-каналы через юзербота — у телеграм-доноров видео
+    # кончились, а «Секреты Спиц» берут видео именно отсюда
+    - mx:-68806745298320
+    - mx:-71924502338122
   dachniki_2:
     telegram:
     - dacha_ogorod
@@ -5328,7 +5336,7 @@ channel_settings:
     # 01.09: жёсткий видео-фильтр сбора снят — у доноров свежих видео 0,
     # фото 59, канал вставал. Приоритет видео держит video_first.
     video_first: true
-    fetch_pages: 8   # 28.07: близнецам нужен архив доноров (sibling-дедуп их разводит); остальным Дача-каналам глубина 3
+    fetch_pages: 25  # 02.09: 8->25 — свежих видео у доноров нет, копаем глубже (у ЖЦА 25 давно)
     media_mode: require_media
     rewrite_enabled: null
     rewrite_prompt: ''
@@ -5488,7 +5496,7 @@ channel_settings:
     # 01.09: жёсткий видео-фильтр сбора снят — у доноров свежих видео 0,
     # фото 59, канал вставал. Приоритет видео держит video_first.
     video_first: true
-    fetch_pages: 8   # 28.07: близнецам нужен архив доноров (sibling-дедуп их разводит); остальным Дача-каналам глубина 3
+    fetch_pages: 25  # 02.09: 8->25 — свежих видео у доноров нет, копаем глубже (у ЖЦА 25 давно)
     media_mode: require_media
     rewrite_enabled: null
     rewrite_prompt: ''

@@ -111741,3 +111741,775 @@ hand_made_decor
 2026-09-02 00:32:10,746 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
 2026-09-02 00:32:10,747 [INFO] fetcher: [Города в MAX][rybinsk_v_max] Очередь 4/4 — добор не нужен
 ✅ Добавлено в очередь: 0 постов
+2026-09-02 06:32:09,112 [INFO] __main__: === Сбор контента ===
+2026-09-02 06:32:11,409 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-02 06:32:11,410 [INFO] fetcher: [Города России][abakan] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,411 [INFO] fetcher: [Города России][achinsk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,412 [INFO] fetcher: [Города России][almetevsk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,413 [INFO] fetcher: [Города России][angarsk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,414 [INFO] fetcher: [Города России][arkhangelsk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,415 [INFO] fetcher: [Города России][armavir] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,416 [INFO] fetcher: [Города России][artyom] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,416 [INFO] fetcher: [Города России][arzamas] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,417 [INFO] fetcher: [Города России][astrakhan] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,419 [INFO] fetcher: [Города России][balakovo] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,420 [INFO] fetcher: [Города России][balashikha] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,421 [INFO] fetcher: [Города России][barnaul] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,422 [INFO] fetcher: [Города России][bataysk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,423 [INFO] fetcher: [Города России][belgorod] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,424 [INFO] fetcher: [Города России][berezniki] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,425 [INFO] fetcher: [Города России][biysk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,426 [INFO] fetcher: [Города России][blagoveschensk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,427 [INFO] fetcher: [Города России][bratsk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,428 [INFO] fetcher: [Города России][bryansk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,429 [INFO] fetcher: [Города России][cheboksary] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,430 [INFO] fetcher: [Города России][chelyabinsk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,431 [INFO] fetcher: [Города России][cherepovets] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,432 [INFO] fetcher: [Города России][cherkessk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,433 [INFO] fetcher: [Города России][chita] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,434 [INFO] fetcher: [Города России][domodedovo] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,435 [INFO] fetcher: [Города России][donetsk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,436 [INFO] fetcher: [Города России][dzerzhinsk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,436 [INFO] fetcher: [Города России][ekaterinburg] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,438 [INFO] fetcher: [Города России][elektrostal] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,439 [INFO] fetcher: [Города России][elets] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,440 [INFO] fetcher: [Города России][elista] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,440 [INFO] fetcher: [Города России][essentuki] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,441 [INFO] fetcher: [Города России][gatchina] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,442 [INFO] fetcher: [Города России][glazov] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,443 [INFO] fetcher: [Города России][gubkin] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,444 [INFO] fetcher: [Города России][irkutsk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,445 [INFO] fetcher: [Города России][ivanovo] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,445 [INFO] fetcher: [Города России][izhevsk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,446 [INFO] fetcher: [Города России][kaliningrad] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,447 [INFO] fetcher: [Города России][kaluga] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,448 [INFO] fetcher: [Города России][kamensk_uralskiy] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,449 [INFO] fetcher: [Города России][kamyshin] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,450 [INFO] fetcher: [Города России][kazan] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,451 [INFO] fetcher: [Города России][kemerovo] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,452 [INFO] fetcher: [Города России][khabarovsk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,453 [INFO] fetcher: [Города России][novokuybyshevsk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,454 [INFO] fetcher: [Города России][samara] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,455 [INFO] fetcher: [Города России][sarapul] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,456 [INFO] fetcher: [Города России][saratov] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,457 [INFO] fetcher: [Города России][syzran] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,458 [INFO] fetcher: [Города России][tolyatti] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,459 [INFO] fetcher: [Города России][ulyanovsk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,461 [INFO] fetcher: [Города России][votkinsk] Очередь 4/4 — добор не нужен
+2026-09-02 06:32:11,475 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-02 06:32:11,477 [INFO] fetcher: [Контент][dom] Очередь 8/8 — добор не нужен
+2026-09-02 06:32:11,478 [INFO] fetcher: [Контент][vyazanie] Очередь 8/8 — добор не нужен
+2026-09-02 06:32:11,479 [INFO] fetcher: [Контент][moda] Очередь 8/8 — добор не нужен
+2026-09-02 06:32:11,499 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-02 06:32:21,632 [ERROR] sources.telegram: TG @Nadacheprigoditca: timed out
+2026-09-02 06:32:31,641 [ERROR] sources.telegram: TG @dacha_idei_reshenia: timed out
+2026-09-02 06:32:41,643 [ERROR] sources.telegram: TG @dacha_ogorod_sad: timed out
+2026-09-02 06:32:51,654 [ERROR] sources.telegram: TG @dacha_like: timed out
+2026-09-02 06:33:01,666 [ERROR] sources.telegram: TG @da4nie_zametki: timed out
+2026-09-02 06:33:11,677 [ERROR] sources.telegram: TG @dacha_hitrosti: timed out
+2026-09-02 06:33:21,689 [ERROR] sources.telegram: TG @dacha_ogorod: timed out
+2026-09-02 06:33:31,698 [ERROR] sources.telegram: TG @sovet_dom: timed out
+2026-09-02 06:33:31,699 [INFO] fetcher: [Дача и Вязание][dachnyj_ugolok_2] +0/1
+2026-09-02 06:33:31,700 [INFO] fetcher: [Дача и Вязание][skhemy_vyazaniya_3] Очередь 21/12 — добор не нужен
+2026-09-02 06:33:41,709 [ERROR] sources.telegram: TG @hitrosti_domo: timed out
+2026-09-02 06:33:51,720 [ERROR] sources.telegram: TG @lifehacks_house1: timed out
+2026-09-02 06:34:01,732 [ERROR] sources.telegram: TG @hozaya: timed out
+2026-09-02 06:34:11,744 [ERROR] sources.telegram: TG @sovr_hozyaika: timed out
+2026-09-02 06:34:21,755 [ERROR] sources.telegram: TG @hitrosti_hozyaushki: timed out
+2026-09-02 06:34:31,766 [ERROR] sources.telegram: TG @haki_chistoty: timed out
+2026-09-02 06:34:41,777 [ERROR] sources.telegram: TG @lifehackich: timed out
+2026-09-02 06:34:51,788 [ERROR] sources.telegram: TG @poleznoe_sow: timed out
+2026-09-02 06:35:01,799 [ERROR] sources.telegram: TG @ifehackf: timed out
+2026-09-02 06:35:11,811 [ERROR] sources.telegram: TG @laifhakini: timed out
+2026-09-02 06:35:11,811 [INFO] fetcher: [Дача и Вязание][nash_dom_2] +0/1
+2026-09-02 06:35:21,825 [ERROR] sources.telegram: TG @petelbka: timed out
+2026-09-02 06:35:31,831 [ERROR] sources.telegram: TG @lovevjazanie: timed out
+2026-09-02 06:35:41,843 [ERROR] sources.telegram: TG @leytuvyjuj4: timed out
+2026-09-02 06:35:51,853 [ERROR] sources.telegram: TG @stilnoe_vjazanie: timed out
+2026-09-02 06:36:01,861 [ERROR] sources.telegram: TG @knit_forever: timed out
+2026-09-02 06:36:11,869 [ERROR] sources.telegram: TG @kopilka_uzorov: timed out
+2026-09-02 06:36:21,873 [ERROR] sources.telegram: TG @spize25: timed out
+2026-09-02 06:36:31,881 [ERROR] sources.telegram: TG @vyazalruk: timed out
+2026-09-02 06:36:41,892 [ERROR] sources.telegram: TG @mkVyazanie: timed out
+2026-09-02 06:36:51,901 [ERROR] sources.telegram: TG @knitting_is_the_meaning_of_life: timed out
+2026-09-02 06:37:01,909 [ERROR] sources.telegram: TG @hand_knit: timed out
+2026-09-02 06:37:11,917 [ERROR] sources.telegram: TG @vyazanie_maria: timed out
+2026-09-02 06:37:21,925 [ERROR] sources.telegram: TG @hand_sewing: timed out
+2026-09-02 06:37:21,925 [INFO] fetcher: [Дача и Вязание][masterskaya_vyaza_2] +0/1
+2026-09-02 06:37:31,937 [ERROR] sources.telegram: TG @dacha_idei_reshenia: timed out
+2026-09-02 06:37:41,948 [ERROR] sources.telegram: TG @da4nie_zametki: timed out
+2026-09-02 06:37:51,953 [ERROR] sources.telegram: TG @dacha_like: timed out
+2026-09-02 06:38:01,964 [ERROR] sources.telegram: TG @dacha_ogorod: timed out
+2026-09-02 06:38:11,975 [ERROR] sources.telegram: TG @dacha_ogorod_sad: timed out
+2026-09-02 06:38:21,985 [ERROR] sources.telegram: TG @sovet_dom: timed out
+2026-09-02 06:38:31,993 [ERROR] sources.telegram: TG @dacha_hitrosti: timed out
+2026-09-02 06:38:42,004 [ERROR] sources.telegram: TG @Nadacheprigoditca: timed out
+2026-09-02 06:38:52,018 [ERROR] sources.telegram: TG @prodvorru: timed out
+2026-09-02 06:38:52,018 [INFO] fetcher: [Дача и Вязание][dachniki_2] +0/6
+2026-09-02 06:39:02,031 [ERROR] sources.telegram: TG @mensreceipts: timed out
+2026-09-02 06:39:12,042 [ERROR] sources.telegram: TG @dom_resept: timed out
+2026-09-02 06:39:22,053 [ERROR] sources.telegram: TG @retsepty4: timed out
+2026-09-02 06:39:32,064 [ERROR] sources.telegram: TG @vkusnye_poleznye_domashnie: timed out
+2026-09-02 06:39:42,075 [ERROR] sources.telegram: TG @h824tty: timed out
+2026-09-02 06:40:17,317 [INFO] sources.telegram: TG @Kulinaria_Receptii: 59 постов (3 стр.)
+2026-09-02 06:40:32,600 [INFO] fetcher: [Дача и Вязание][dom_povara_2] +1/1
+2026-09-02 06:40:32,617 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-02 06:40:32,619 [INFO] fetcher: [Города лайв][abakan_lajv_respublika_khakasiya] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,620 [INFO] fetcher: [Города лайв][arkhangelsk_lajv_arkhangelskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,621 [INFO] fetcher: [Города лайв][astrakhan_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,621 [INFO] fetcher: [Города лайв][balashikha_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,623 [INFO] fetcher: [Города лайв][barnaul_lajv_altajskij_kraj] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,624 [INFO] fetcher: [Города лайв][belgorod_lajv_belgorodskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,625 [INFO] fetcher: [Города лайв][blagoveschensk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,626 [INFO] fetcher: [Города лайв][bryansk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,627 [INFO] fetcher: [Города лайв][velikij_novgorod_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,628 [INFO] fetcher: [Города лайв][vladivostok_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,628 [INFO] fetcher: [Города лайв][vladikavkaz_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,629 [INFO] fetcher: [Города лайв][vladimir_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,630 [INFO] fetcher: [Города лайв][volgograd_lajv_volgogradskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,631 [INFO] fetcher: [Города лайв][volzhskij_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,632 [INFO] fetcher: [Города лайв][vologda_lajv_vologodskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,633 [INFO] fetcher: [Города лайв][voronezh_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,634 [INFO] fetcher: [Города лайв][ekaterinburg_lajv_sverdlovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,635 [INFO] fetcher: [Города лайв][ivanovo_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,635 [INFO] fetcher: [Города лайв][izhevsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,636 [INFO] fetcher: [Города лайв][irkutsk_lajv_irkutskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,638 [INFO] fetcher: [Города лайв][joshkar_ola_lajv_respublika_marij_el] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,639 [INFO] fetcher: [Города лайв][kazan_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,640 [INFO] fetcher: [Города лайв][kaliningrad_laj] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,641 [INFO] fetcher: [Города лайв][kaluga_lajv_k] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,642 [INFO] fetcher: [Города лайв][kamensk_uralskij_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,643 [INFO] fetcher: [Города лайв][kemerovo_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,644 [INFO] fetcher: [Города лайв][kirov_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,645 [INFO] fetcher: [Города лайв][kostroma_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,646 [INFO] fetcher: [Города лайв][krasnodar_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,647 [INFO] fetcher: [Города лайв][krasnoyarsk_lajv_krasnoyarskij_kraj] Очередь 5/4 — добор не нужен
+2026-09-02 06:40:32,648 [INFO] fetcher: [Города лайв][krym_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,649 [INFO] fetcher: [Города лайв][kurgan_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 06:40:32,650 [INFO] fetcher: [Города лайв][kursk_lajv_kurskaya_oblast] Очередь 6/4 — добор не нужен
+2026-09-02 06:40:32,651 [INFO] fetcher: [Города лайв][lipetsk_lajv_lipetskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,652 [INFO] fetcher: [Города лайв][magnitogorsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,653 [INFO] fetcher: [Города лайв][majkop_lajv_respublika_adygeya] Очередь 6/4 — добор не нужен
+2026-09-02 06:40:32,654 [INFO] fetcher: [Города лайв][moskva_lajv_moskovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,655 [INFO] fetcher: [Города лайв][murmansk_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 06:40:32,656 [INFO] fetcher: [Города лайв][naberezhnye_cheln] Очередь 6/4 — добор не нужен
+2026-09-02 06:40:32,656 [INFO] fetcher: [Города лайв][nalchik_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,657 [INFO] fetcher: [Города лайв][nizhnekamsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,658 [INFO] fetcher: [Города лайв][nizhnij_novgorod_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,659 [INFO] fetcher: [Города лайв][novokuznetsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,660 [INFO] fetcher: [Города лайв][novorossijsk_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 06:40:32,661 [INFO] fetcher: [Города лайв][novosibirsk_lajv_novosibirskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,662 [INFO] fetcher: [Города лайв][omsk_lajv_omskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,663 [INFO] fetcher: [Города лайв][orenburg_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 06:40:32,665 [INFO] fetcher: [Города лайв][orsk_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 06:40:32,666 [INFO] fetcher: [Города лайв][oryol_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 06:40:32,666 [INFO] fetcher: [Города лайв][penza_lajv_penzenskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-02 06:40:32,668 [INFO] fetcher: [Города лайв][perm_lajv_permskij_kraj] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,669 [INFO] fetcher: [Города лайв][petrozavodsk_la] Очередь 5/4 — добор не нужен
+2026-09-02 06:40:32,670 [INFO] fetcher: [Города лайв][podolsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,671 [INFO] fetcher: [Города лайв][pskov_lajv_pskovskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-02 06:40:32,672 [INFO] fetcher: [Города лайв][rostov_na_donu_2] Очередь 6/4 — добор не нужен
+2026-09-02 06:40:32,673 [INFO] fetcher: [Города лайв][ryazan_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,674 [INFO] fetcher: [Города лайв][samara_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 06:40:32,674 [INFO] fetcher: [Города лайв][sankt_peterburg_lajv_leningradskaya_obla] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,675 [INFO] fetcher: [Города лайв][saransk_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 06:40:32,676 [INFO] fetcher: [Города лайв][saratov_i_engels_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,677 [INFO] fetcher: [Города лайв][sevastopol_laj] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,678 [INFO] fetcher: [Города лайв][sochi_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 06:40:32,679 [INFO] fetcher: [Города лайв][stavropol_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 06:40:32,680 [INFO] fetcher: [Города лайв][surgut_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 06:40:32,681 [INFO] fetcher: [Города лайв][syktyvkar_lajv_respublika_komi] Очередь 5/4 — добор не нужен
+2026-09-02 06:40:32,682 [INFO] fetcher: [Города лайв][taganrog_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 06:40:32,683 [INFO] fetcher: [Города лайв][tambov_lajv_tambovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,684 [INFO] fetcher: [Города лайв][tver_lajv_tverskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-02 06:40:32,685 [INFO] fetcher: [Города лайв][tolyatti_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,686 [INFO] fetcher: [Города лайв][tomsk_lajv_tomskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,687 [INFO] fetcher: [Города лайв][tula_lajv_tulskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,687 [INFO] fetcher: [Города лайв][tyumen_lajv_tyumenskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-02 06:40:32,688 [INFO] fetcher: [Города лайв][ulan_ude_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 06:40:32,689 [INFO] fetcher: [Города лайв][ulyanovsk_lajv_ulyanovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,690 [INFO] fetcher: [Города лайв][ufa_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,691 [INFO] fetcher: [Города лайв][khabarovsk_lajv_khabarovskij_kraj] Очередь 6/4 — добор не нужен
+2026-09-02 06:40:32,692 [INFO] fetcher: [Города лайв][cheboksary_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 06:40:32,693 [INFO] fetcher: [Города лайв][chelyabinsk_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 06:40:32,693 [INFO] fetcher: [Города лайв][chita_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,694 [INFO] fetcher: [Города лайв][yakutsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 06:40:32,695 [INFO] fetcher: [Города лайв][yaroslavl_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 06:40:32,709 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-02 06:40:32,711 [INFO] fetcher: [Города в MAX][rybinsk_v_max] Очередь 4/4 — добор не нужен
+✅ Добавлено в очередь: 1 постов
+2026-09-02 12:33:09,291 [INFO] __main__: === Сбор контента ===
+2026-09-02 12:33:11,651 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-02 12:33:11,653 [INFO] fetcher: [Города России][abakan] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,655 [INFO] fetcher: [Города России][achinsk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,656 [INFO] fetcher: [Города России][almetevsk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,658 [INFO] fetcher: [Города России][angarsk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,659 [INFO] fetcher: [Города России][arkhangelsk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,660 [INFO] fetcher: [Города России][armavir] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,661 [INFO] fetcher: [Города России][artyom] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,662 [INFO] fetcher: [Города России][arzamas] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,663 [INFO] fetcher: [Города России][astrakhan] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,664 [INFO] fetcher: [Города России][balakovo] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,665 [INFO] fetcher: [Города России][balashikha] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,666 [INFO] fetcher: [Города России][barnaul] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,667 [INFO] fetcher: [Города России][bataysk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,668 [INFO] fetcher: [Города России][belgorod] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,669 [INFO] fetcher: [Города России][berezniki] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,670 [INFO] fetcher: [Города России][biysk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,671 [INFO] fetcher: [Города России][blagoveschensk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,672 [INFO] fetcher: [Города России][bratsk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,673 [INFO] fetcher: [Города России][bryansk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,674 [INFO] fetcher: [Города России][cheboksary] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,675 [INFO] fetcher: [Города России][chelyabinsk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,676 [INFO] fetcher: [Города России][cherepovets] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,677 [INFO] fetcher: [Города России][cherkessk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,678 [INFO] fetcher: [Города России][chita] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,679 [INFO] fetcher: [Города России][domodedovo] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,680 [INFO] fetcher: [Города России][donetsk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,681 [INFO] fetcher: [Города России][dzerzhinsk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,682 [INFO] fetcher: [Города России][ekaterinburg] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,684 [INFO] fetcher: [Города России][elektrostal] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,685 [INFO] fetcher: [Города России][elets] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,686 [INFO] fetcher: [Города России][elista] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,686 [INFO] fetcher: [Города России][essentuki] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,687 [INFO] fetcher: [Города России][gatchina] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,688 [INFO] fetcher: [Города России][glazov] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,689 [INFO] fetcher: [Города России][gubkin] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,690 [INFO] fetcher: [Города России][irkutsk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,691 [INFO] fetcher: [Города России][ivanovo] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,692 [INFO] fetcher: [Города России][izhevsk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,694 [INFO] fetcher: [Города России][kaliningrad] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,695 [INFO] fetcher: [Города России][kaluga] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,696 [INFO] fetcher: [Города России][kamensk_uralskiy] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,697 [INFO] fetcher: [Города России][kamyshin] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,699 [INFO] fetcher: [Города России][kazan] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,700 [INFO] fetcher: [Города России][kemerovo] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,702 [INFO] fetcher: [Города России][khabarovsk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,703 [INFO] fetcher: [Города России][novokuybyshevsk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,704 [INFO] fetcher: [Города России][samara] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,705 [INFO] fetcher: [Города России][sarapul] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,706 [INFO] fetcher: [Города России][saratov] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,707 [INFO] fetcher: [Города России][syzran] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,708 [INFO] fetcher: [Города России][tolyatti] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,710 [INFO] fetcher: [Города России][ulyanovsk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,710 [INFO] fetcher: [Города России][votkinsk] Очередь 4/4 — добор не нужен
+2026-09-02 12:33:11,728 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-02 12:33:11,730 [INFO] fetcher: [Контент][dom] Очередь 8/8 — добор не нужен
+2026-09-02 12:33:11,731 [INFO] fetcher: [Контент][vyazanie] Очередь 8/8 — добор не нужен
+2026-09-02 12:33:11,732 [INFO] fetcher: [Контент][moda] Очередь 8/8 — добор не нужен
+2026-09-02 12:33:11,748 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-02 12:33:35,236 [INFO] sources.telegram: TG @dacha_ogorod_sad: 19 постов (3 стр.)
+2026-09-02 12:33:45,716 [INFO] fetcher: [Дача и Вязание][dachnyj_ugolok_2] +2/2
+2026-09-02 12:33:45,718 [INFO] fetcher: [Дача и Вязание][skhemy_vyazaniya_3] Очередь 17/12 — добор не нужен
+2026-09-02 12:33:45,957 [INFO] sources.telegram: TG @haki_chistoty: 2 постов (3 стр.)
+2026-09-02 12:34:21,579 [INFO] sources.telegram: TG @lifehacks_house1: 58 постов (3 стр.)
+2026-09-02 12:34:25,705 [INFO] processor.rewriter: [rewriter] dacha short input (24c) -> fallback caption, no LLM
+2026-09-02 12:34:27,772 [INFO] processor.rewriter: [rewriter] dacha short input (23c) -> fallback caption, no LLM
+2026-09-02 12:34:36,546 [INFO] processor.rewriter: [rewriter] dacha short input (21c) -> fallback caption, no LLM
+2026-09-02 12:34:37,532 [INFO] processor.rewriter: [rewriter] dacha short input (19c) -> fallback caption, no LLM
+2026-09-02 12:34:38,971 [INFO] processor.rewriter: [rewriter] dacha short input (26c) -> fallback caption, no LLM
+2026-09-02 12:34:40,297 [INFO] processor.rewriter: [rewriter] dacha short input (28c) -> fallback caption, no LLM
+2026-09-02 12:34:40,311 [INFO] fetcher: [Дача и Вязание][nash_dom_2] +8/8
+2026-09-02 12:34:40,313 [INFO] fetcher: [Дача и Вязание][masterskaya_vyaza_2] Очередь 14/12 — добор не нужен
+2026-09-02 12:35:06,932 [INFO] sources.telegram: TG @sovet_dom: 30 постов (3 стр.)
+2026-09-02 12:35:09,499 [INFO] dacha_curation: [dacha_curation] dachniki_2 REJECT (Реклама специалиста без конкретной темы поста): Мастер своего дела. Как вам результат?
+2026-09-02 12:35:09,499 [INFO] fetcher: [dachniki_2] curation reject (Реклама специалиста без конкретной темы поста): Мастер своего дела. Как вам результат?
+2026-09-02 12:40:16,961 [INFO] sources.telegram: TG @prodvorru: 339 постов (25 стр.)
+2026-09-02 12:40:20,094 [INFO] fetcher: [REGEX_BLOCK_HIT] channel=dachniki_2 pattern='\\b(?:скидк|купи|закаж|акция|цена|стоит|за\\s+всего)\\w*[\\s\\S]{0,40}?\\d{2,5}\\s*(?:[' match='купить за 300-400 рублей' text='смородина оранжевое чудо что за сорт это красная смородина . её главная фишка — необычный для этого вида оранжево-красны'
+2026-09-02 12:40:46,488 [INFO] dacha_curation: [dacha_curation] dachniki_2 REJECT (Реклама услуги по созданию пруда, нет темы канала): Замечательный пруд на участке
+2026-09-02 12:40:46,489 [INFO] fetcher: [dachniki_2] curation reject (Реклама услуги по созданию пруда, нет темы канала): Замечательный пруд на участке
+2026-09-02 12:41:19,172 [INFO] dacha_curation: [dacha_curation] dachniki_2 REJECT (Пост содержит рекламу каталога проектов домов в инстаграм, ч): 4 этапа внесения удобрений для пионов.
+1 этап - как только п
+2026-09-02 12:41:19,172 [INFO] fetcher: [dachniki_2] curation reject (Пост содержит рекламу каталога проектов домов в инстаграм, ч): 4 этапа внесения удобрений для пионов.
+1 этап - как только п
+2026-09-02 12:41:32,964 [INFO] dacha_curation: [dacha_curation] dachniki_2 REJECT (Реклама товара без уточнения контекста): Клумбы из полимерной лозы
+2026-09-02 12:41:32,964 [INFO] fetcher: [dachniki_2] curation reject (Реклама товара без уточнения контекста): Клумбы из полимерной лозы
+2026-09-02 12:41:42,053 [INFO] dacha_curation: [dacha_curation] dachniki_2 REJECT (Упоминание цен и продавца — реклама товара.): Виноград Ведьмины пальцы
+– молодой сорт, отличающийся необыч
+2026-09-02 12:41:42,053 [INFO] fetcher: [dachniki_2] curation reject (Упоминание цен и продавца — реклама товара.): Виноград Ведьмины пальцы
+– молодой сорт, отличающийся необыч
+2026-09-02 12:41:47,118 [INFO] dacha_curation: [dacha_curation] dachniki_2 REJECT (непонятно, о чём пост; возможна реклама удобрения): Удобрение для рассады
+2026-09-02 12:41:47,118 [INFO] fetcher: [dachniki_2] curation reject (непонятно, о чём пост; возможна реклама удобрения): Удобрение для рассады
+2026-09-02 12:42:09,498 [INFO] fetcher: [REGEX_BLOCK_HIT] channel=dachniki_2 pattern='\\bреклам\\w*\\b' match='реклама' text='🔥 разница между рынком и торгами. сегодня похожие участки в той же локации на рынке стоят 1,5–2 млн ₽ . но через муницип'
+2026-09-02 12:42:42,556 [INFO] fetcher: [REGEX_BLOCK_HIT] channel=dachniki_2 pattern='\\b(?:скидк|купи|закаж|акция|цена|стоит|за\\s+всего)\\w*[\\s\\S]{0,40}?\\d{2,5}\\s*(?:[' match='цена за саженец от 1000 рублей' text='🍎 яблоня розовый жемчуг относится к природным полукарликам, скороплодный сорт с позднелетним сроком созревания. в умерен'
+2026-09-02 12:43:03,588 [INFO] processor.rewriter: [rewriter] dacha short input (24c) -> fallback caption, no LLM
+2026-09-02 12:43:03,609 [INFO] fetcher: [Дача и Вязание][dachniki_2] +5/5
+2026-09-02 12:43:32,767 [INFO] sources.telegram: TG @vkusnye_poleznye_domashnie: 49 постов (3 стр.)
+2026-09-02 12:45:11,009 [INFO] sources.telegram: TG @ppreceptiki: 37 постов (3 стр.)
+2026-09-02 12:45:21,073 [INFO] dacha_curation: [dacha_curation] dom_povara_2 REJECT (Тема не соответствует кулинарному каналу, это светские новос): Сын Кабаевой вырос: ахнете, увидев, на кого похож
+Личная жиз
+2026-09-02 12:45:21,073 [INFO] fetcher: [dom_povara_2] curation reject (Тема не соответствует кулинарному каналу, это светские новос): Сын Кабаевой вырос: ахнете, увидев, на кого похож
+Личная жиз
+2026-09-02 12:45:23,223 [INFO] dacha_curation: [dacha_curation] dom_povara_2 REJECT (Текст бессмысленный, неясно, о чём пост и какая тема.): Сохраняйте скорее
+👇
+📁
+Открытки для улыбки
+2026-09-02 12:45:23,223 [INFO] fetcher: [dom_povara_2] curation reject (Текст бессмысленный, неясно, о чём пост и какая тема.): Сохраняйте скорее
+👇
+📁
+Открытки для улыбки
+2026-09-02 12:45:24,586 [INFO] dacha_curation: [dacha_curation] dom_povara_2 REJECT (Тема не соответствует кулинарному каналу, религиозный контен): Эта короткая молитва Антония Оптинского умеет удивительную с
+2026-09-02 12:45:24,586 [INFO] fetcher: [dom_povara_2] curation reject (Тема не соответствует кулинарному каналу, религиозный контен): Эта короткая молитва Антония Оптинского умеет удивительную с
+2026-09-02 12:45:30,559 [INFO] fetcher: [Дача и Вязание][dom_povara_2] +1/1
+2026-09-02 12:45:30,643 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-02 12:45:30,645 [INFO] fetcher: [Города лайв][abakan_lajv_respublika_khakasiya] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,646 [INFO] fetcher: [Города лайв][arkhangelsk_lajv_arkhangelskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,647 [INFO] fetcher: [Города лайв][astrakhan_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,648 [INFO] fetcher: [Города лайв][balashikha_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,649 [INFO] fetcher: [Города лайв][barnaul_lajv_altajskij_kraj] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,650 [INFO] fetcher: [Города лайв][belgorod_lajv_belgorodskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,651 [INFO] fetcher: [Города лайв][blagoveschensk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,658 [INFO] fetcher: [Города лайв][bryansk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,660 [INFO] fetcher: [Города лайв][velikij_novgorod_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,661 [INFO] fetcher: [Города лайв][vladivostok_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,662 [INFO] fetcher: [Города лайв][vladikavkaz_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,663 [INFO] fetcher: [Города лайв][vladimir_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,664 [INFO] fetcher: [Города лайв][volgograd_lajv_volgogradskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,665 [INFO] fetcher: [Города лайв][volzhskij_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,666 [INFO] fetcher: [Города лайв][vologda_lajv_vologodskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,667 [INFO] fetcher: [Города лайв][voronezh_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,668 [INFO] fetcher: [Города лайв][ekaterinburg_lajv_sverdlovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,670 [INFO] fetcher: [Города лайв][ivanovo_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,671 [INFO] fetcher: [Города лайв][izhevsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,672 [INFO] fetcher: [Города лайв][irkutsk_lajv_irkutskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,673 [INFO] fetcher: [Города лайв][joshkar_ola_lajv_respublika_marij_el] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,674 [INFO] fetcher: [Города лайв][kazan_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,675 [INFO] fetcher: [Города лайв][kaliningrad_laj] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,676 [INFO] fetcher: [Города лайв][kaluga_lajv_k] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,677 [INFO] fetcher: [Города лайв][kamensk_uralskij_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,678 [INFO] fetcher: [Города лайв][kemerovo_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,679 [INFO] fetcher: [Города лайв][kirov_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,680 [INFO] fetcher: [Города лайв][kostroma_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,681 [INFO] fetcher: [Города лайв][krasnodar_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,682 [INFO] fetcher: [Города лайв][krasnoyarsk_lajv_krasnoyarskij_kraj] Очередь 5/4 — добор не нужен
+2026-09-02 12:45:30,683 [INFO] fetcher: [Города лайв][krym_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,684 [INFO] fetcher: [Города лайв][kurgan_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 12:45:30,685 [INFO] fetcher: [Города лайв][kursk_lajv_kurskaya_oblast] Очередь 6/4 — добор не нужен
+2026-09-02 12:45:30,686 [INFO] fetcher: [Города лайв][lipetsk_lajv_lipetskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,687 [INFO] fetcher: [Города лайв][magnitogorsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,688 [INFO] fetcher: [Города лайв][majkop_lajv_respublika_adygeya] Очередь 6/4 — добор не нужен
+2026-09-02 12:45:30,689 [INFO] fetcher: [Города лайв][moskva_lajv_moskovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,690 [INFO] fetcher: [Города лайв][murmansk_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 12:45:30,691 [INFO] fetcher: [Города лайв][naberezhnye_cheln] Очередь 6/4 — добор не нужен
+2026-09-02 12:45:30,692 [INFO] fetcher: [Города лайв][nalchik_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,693 [INFO] fetcher: [Города лайв][nizhnekamsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,694 [INFO] fetcher: [Города лайв][nizhnij_novgorod_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,695 [INFO] fetcher: [Города лайв][novokuznetsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,696 [INFO] fetcher: [Города лайв][novorossijsk_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 12:45:30,697 [INFO] fetcher: [Города лайв][novosibirsk_lajv_novosibirskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,698 [INFO] fetcher: [Города лайв][omsk_lajv_omskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,699 [INFO] fetcher: [Города лайв][orenburg_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 12:45:30,700 [INFO] fetcher: [Города лайв][orsk_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 12:45:30,701 [INFO] fetcher: [Города лайв][oryol_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 12:45:30,702 [INFO] fetcher: [Города лайв][penza_lajv_penzenskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-02 12:45:30,703 [INFO] fetcher: [Города лайв][perm_lajv_permskij_kraj] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,705 [INFO] fetcher: [Города лайв][petrozavodsk_la] Очередь 5/4 — добор не нужен
+2026-09-02 12:45:30,706 [INFO] fetcher: [Города лайв][podolsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,707 [INFO] fetcher: [Города лайв][pskov_lajv_pskovskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-02 12:45:30,708 [INFO] fetcher: [Города лайв][rostov_na_donu_2] Очередь 6/4 — добор не нужен
+2026-09-02 12:45:30,709 [INFO] fetcher: [Города лайв][ryazan_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,710 [INFO] fetcher: [Города лайв][samara_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 12:45:30,711 [INFO] fetcher: [Города лайв][sankt_peterburg_lajv_leningradskaya_obla] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,712 [INFO] fetcher: [Города лайв][saransk_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 12:45:30,713 [INFO] fetcher: [Города лайв][saratov_i_engels_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,714 [INFO] fetcher: [Города лайв][sevastopol_laj] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,715 [INFO] fetcher: [Города лайв][sochi_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 12:45:30,716 [INFO] fetcher: [Города лайв][stavropol_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 12:45:30,717 [INFO] fetcher: [Города лайв][surgut_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 12:45:30,718 [INFO] fetcher: [Города лайв][syktyvkar_lajv_respublika_komi] Очередь 5/4 — добор не нужен
+2026-09-02 12:45:30,719 [INFO] fetcher: [Города лайв][taganrog_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 12:45:30,720 [INFO] fetcher: [Города лайв][tambov_lajv_tambovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,721 [INFO] fetcher: [Города лайв][tver_lajv_tverskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-02 12:45:30,722 [INFO] fetcher: [Города лайв][tolyatti_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,723 [INFO] fetcher: [Города лайв][tomsk_lajv_tomskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,724 [INFO] fetcher: [Города лайв][tula_lajv_tulskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,725 [INFO] fetcher: [Города лайв][tyumen_lajv_tyumenskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-02 12:45:30,726 [INFO] fetcher: [Города лайв][ulan_ude_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 12:45:30,727 [INFO] fetcher: [Города лайв][ulyanovsk_lajv_ulyanovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,728 [INFO] fetcher: [Города лайв][ufa_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,729 [INFO] fetcher: [Города лайв][khabarovsk_lajv_khabarovskij_kraj] Очередь 6/4 — добор не нужен
+2026-09-02 12:45:30,730 [INFO] fetcher: [Города лайв][cheboksary_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 12:45:30,731 [INFO] fetcher: [Города лайв][chelyabinsk_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 12:45:30,732 [INFO] fetcher: [Города лайв][chita_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,733 [INFO] fetcher: [Города лайв][yakutsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 12:45:30,735 [INFO] fetcher: [Города лайв][yaroslavl_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 12:45:30,749 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-02 12:45:30,750 [INFO] fetcher: [Города в MAX][rybinsk_v_max] Очередь 4/4 — добор не нужен
+✅ Добавлено в очередь: 16 постов
+2026-09-02 18:34:09,035 [INFO] __main__: === Сбор контента ===
+2026-09-02 18:34:11,138 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-02 18:34:11,140 [INFO] fetcher: [Города России][abakan] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,141 [INFO] fetcher: [Города России][achinsk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,142 [INFO] fetcher: [Города России][almetevsk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,143 [INFO] fetcher: [Города России][angarsk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,143 [INFO] fetcher: [Города России][arkhangelsk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,144 [INFO] fetcher: [Города России][armavir] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,145 [INFO] fetcher: [Города России][artyom] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,146 [INFO] fetcher: [Города России][arzamas] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,147 [INFO] fetcher: [Города России][astrakhan] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,148 [INFO] fetcher: [Города России][balakovo] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,149 [INFO] fetcher: [Города России][balashikha] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,150 [INFO] fetcher: [Города России][barnaul] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,151 [INFO] fetcher: [Города России][bataysk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,152 [INFO] fetcher: [Города России][belgorod] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,152 [INFO] fetcher: [Города России][berezniki] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,153 [INFO] fetcher: [Города России][biysk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,154 [INFO] fetcher: [Города России][blagoveschensk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,155 [INFO] fetcher: [Города России][bratsk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,156 [INFO] fetcher: [Города России][bryansk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,157 [INFO] fetcher: [Города России][cheboksary] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,158 [INFO] fetcher: [Города России][chelyabinsk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,159 [INFO] fetcher: [Города России][cherepovets] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,161 [INFO] fetcher: [Города России][cherkessk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,162 [INFO] fetcher: [Города России][chita] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,163 [INFO] fetcher: [Города России][domodedovo] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,164 [INFO] fetcher: [Города России][donetsk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,166 [INFO] fetcher: [Города России][dzerzhinsk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,167 [INFO] fetcher: [Города России][ekaterinburg] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,168 [INFO] fetcher: [Города России][elektrostal] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,169 [INFO] fetcher: [Города России][elets] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,170 [INFO] fetcher: [Города России][elista] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,171 [INFO] fetcher: [Города России][essentuki] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,172 [INFO] fetcher: [Города России][gatchina] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,173 [INFO] fetcher: [Города России][glazov] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,174 [INFO] fetcher: [Города России][gubkin] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,175 [INFO] fetcher: [Города России][irkutsk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,176 [INFO] fetcher: [Города России][ivanovo] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,176 [INFO] fetcher: [Города России][izhevsk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,178 [INFO] fetcher: [Города России][kaliningrad] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,178 [INFO] fetcher: [Города России][kaluga] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,179 [INFO] fetcher: [Города России][kamensk_uralskiy] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,180 [INFO] fetcher: [Города России][kamyshin] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,181 [INFO] fetcher: [Города России][kazan] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,182 [INFO] fetcher: [Города России][kemerovo] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,183 [INFO] fetcher: [Города России][khabarovsk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,184 [INFO] fetcher: [Города России][novokuybyshevsk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,185 [INFO] fetcher: [Города России][samara] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,186 [INFO] fetcher: [Города России][sarapul] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,187 [INFO] fetcher: [Города России][saratov] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,189 [INFO] fetcher: [Города России][syzran] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,190 [INFO] fetcher: [Города России][tolyatti] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,191 [INFO] fetcher: [Города России][ulyanovsk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,193 [INFO] fetcher: [Города России][votkinsk] Очередь 4/4 — добор не нужен
+2026-09-02 18:34:11,210 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-02 18:34:11,211 [INFO] fetcher: [Контент][dom] Очередь 8/8 — добор не нужен
+2026-09-02 18:34:11,212 [INFO] fetcher: [Контент][vyazanie] Очередь 8/8 — добор не нужен
+2026-09-02 18:34:11,214 [INFO] fetcher: [Контент][moda] Очередь 8/8 — добор не нужен
+2026-09-02 18:34:11,227 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-02 18:34:32,758 [INFO] sources.telegram: TG @dacha_ogorod: 34 постов (3 стр.)
+2026-09-02 18:34:35,050 [INFO] dacha_curation: [dacha_curation] dachnyj_ugolok_2 REJECT (Бессодержательное приветствие, не по теме канала.): 🍒
+Доброе утро!
+Пусть ваш день начнётся с хорошего настроения
+2026-09-02 18:34:35,051 [INFO] fetcher: [dachnyj_ugolok_2] curation reject (Бессодержательное приветствие, не по теме канала.): 🍒
+Доброе утро!
+Пусть ваш день начнётся с хорошего настроения
+2026-09-02 18:35:13,276 [INFO] fetcher: [Дача и Вязание][dachnyj_ugolok_2] +1/1
+2026-09-02 18:35:13,307 [INFO] fetcher: [REGEX_BLOCK_HIT] channel=skhemy_vyazaniya_3 pattern='\\berid\\b' match='erid' text='футболка befree за 65₽ вместо 799₽😱 ⚡️девочки, мониторю такие резкие скачки и глюки цен на маркетплейсах каждый день. ес'
+2026-09-02 18:36:20,817 [INFO] sources.telegram: TG @vyazalruk: 48 постов (8 стр.)
+2026-09-02 18:36:25,205 [INFO] fetcher: [Дача и Вязание][skhemy_vyazaniya_3] +1/1
+2026-09-02 18:36:25,209 [INFO] fetcher: [Дача и Вязание][nash_dom_2] Очередь 15/12 — добор не нужен
+2026-09-02 18:37:33,677 [INFO] sources.telegram: TG @petelbka: 61 постов (8 стр.)
+2026-09-02 18:38:00,166 [INFO] processor.rewriter: [rewriter] dacha short input (12c) -> fallback caption, no LLM
+2026-09-02 18:38:01,851 [INFO] processor.rewriter: [rewriter] dacha short input (28c) -> fallback caption, no LLM
+2026-09-02 18:38:01,860 [INFO] fetcher: [Дача и Вязание][masterskaya_vyaza_2] +2/2
+2026-09-02 18:38:39,619 [INFO] sources.telegram: TG @dacha_idei_reshenia: 47 постов (3 стр.)
+2026-09-02 18:38:40,729 [INFO] processor.rewriter: [rewriter] dacha short input (6c) -> fallback caption, no LLM
+2026-09-02 18:38:42,139 [INFO] processor.rewriter: [rewriter] dacha short input (16c) -> fallback caption, no LLM
+2026-09-02 18:38:43,457 [INFO] processor.rewriter: [rewriter] dacha short input (27c) -> fallback caption, no LLM
+2026-09-02 18:38:44,665 [INFO] dacha_curation: [dacha_curation] dachniki_2 REJECT (Недостаточно контекста, неясно, о чём именно пост.): Дровница
+2026-09-02 18:38:44,665 [INFO] fetcher: [dachniki_2] curation reject (Недостаточно контекста, неясно, о чём именно пост.): Дровница
+2026-09-02 18:38:51,516 [INFO] dacha_curation: [dacha_curation] dachniki_2 REJECT (Текст не содержит информации о теме канала и выглядит как ре): Кресло трансформер
+👍
+🇷🇺
+2026-09-02 18:38:51,516 [INFO] fetcher: [dachniki_2] curation reject (Текст не содержит информации о теме канала и выглядит как ре): Кресло трансформер
+👍
+🇷🇺
+2026-09-02 18:38:54,875 [INFO] dacha_curation: [dacha_curation] dachniki_2 REJECT (Прямая реклама товара THERMAGENT с указанием магазинов и цен): Ваше отопление готово к сезону?
+Прошлой холодной зимой сотни
+2026-09-02 18:38:54,875 [INFO] fetcher: [dachniki_2] curation reject (Прямая реклама товара THERMAGENT с указанием магазинов и цен): Ваше отопление готово к сезону?
+Прошлой холодной зимой сотни
+2026-09-02 18:39:32,849 [INFO] dacha_curation: [dacha_curation] dachniki_2 REJECT (Недостаточно информации, непонятно, о чём пост): Беседка
+2026-09-02 18:39:32,849 [INFO] fetcher: [dachniki_2] curation reject (Недостаточно информации, непонятно, о чём пост): Беседка
+2026-09-02 18:40:06,296 [INFO] sources.telegram: TG @Nadacheprigoditca: 47 постов (3 стр.)
+2026-09-02 18:40:20,638 [INFO] dacha_curation: [dacha_curation] dachniki_2 REJECT (Промо чужого канала/аккаунта (interiors71).): 📚
+Уличный шкаф или маленький «Гринхаус»
+🎥
+interiors71
+🪵
+🪵
+🪵
+
+2026-09-02 18:40:20,638 [INFO] fetcher: [dachniki_2] curation reject (Промо чужого канала/аккаунта (interiors71).): 📚
+Уличный шкаф или маленький «Гринхаус»
+🎥
+interiors71
+🪵
+🪵
+🪵
+
+2026-09-02 18:40:22,064 [INFO] processor.rewriter: [rewriter] dacha short input (34c) -> fallback caption, no LLM
+2026-09-02 18:40:30,863 [INFO] fetcher: [Дача и Вязание][dachniki_2] +6/6
+2026-09-02 18:40:57,376 [INFO] sources.telegram: TG @ppreceptiki: 38 постов (3 стр.)
+2026-09-02 18:41:02,044 [INFO] dacha_curation: [dacha_curation] dom_povara_2 REJECT (Тема из чужой области — светская хроника, не кулинария.): Сын Кабаевой вырос: ахнете, увидев, на кого похож
+Личная жиз
+2026-09-02 18:41:02,044 [INFO] fetcher: [dom_povara_2] curation reject (Тема из чужой области — светская хроника, не кулинария.): Сын Кабаевой вырос: ахнете, увидев, на кого похож
+Личная жиз
+2026-09-02 18:41:03,451 [INFO] dacha_curation: [dacha_curation] dom_povara_2 REJECT (Текст не связан с кулинарией, непонятно о чём пост): Сохраняйте скорее
+👇
+📁
+Открытки для улыбки
+2026-09-02 18:41:03,451 [INFO] fetcher: [dom_povara_2] curation reject (Текст не связан с кулинарией, непонятно о чём пост): Сохраняйте скорее
+👇
+📁
+Открытки для улыбки
+2026-09-02 18:41:04,399 [INFO] dacha_curation: [dacha_curation] dom_povara_2 REJECT (Тема не соответствует каналу о кулинарии.): Эта короткая молитва Антония Оптинского умеет удивительную с
+2026-09-02 18:41:04,399 [INFO] fetcher: [dom_povara_2] curation reject (Тема не соответствует каналу о кулинарии.): Эта короткая молитва Антония Оптинского умеет удивительную с
+2026-09-02 18:41:08,047 [INFO] dacha_curation: [dacha_curation] dom_povara_2 REJECT (Контент не соответствует теме канала: тест личности, а не ку): Тест личности: Ваш выбор покажет, как вы воспринимаете мир в
+2026-09-02 18:41:08,048 [INFO] fetcher: [dom_povara_2] curation reject (Контент не соответствует теме канала: тест личности, а не ку): Тест личности: Ваш выбор покажет, как вы воспринимаете мир в
+2026-09-02 18:41:08,426 [INFO] processor.rewriter: [rewriter] dacha short input (0c) -> fallback caption, no LLM
+2026-09-02 18:41:09,628 [INFO] dacha_curation: [dacha_curation] dom_povara_2 REJECT (Тема не кулинария; анекдот/юмор вне области канала.): Хохотала до слез
+😂
+Одна подруга жалуется:
+— Мой муж меня дос
+2026-09-02 18:41:09,628 [INFO] fetcher: [dom_povara_2] curation reject (Тема не кулинария; анекдот/юмор вне области канала.): Хохотала до слез
+😂
+Одна подруга жалуется:
+— Мой муж меня дос
+2026-09-02 18:41:16,312 [INFO] processor.rewriter: [rewriter] dacha short input (20c) -> fallback caption, no LLM
+2026-09-02 18:41:31,373 [INFO] fetcher: [Дача и Вязание][dom_povara_2] +4/4
+2026-09-02 18:41:31,640 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-02 18:41:31,642 [INFO] fetcher: [Города лайв][abakan_lajv_respublika_khakasiya] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,643 [INFO] fetcher: [Города лайв][arkhangelsk_lajv_arkhangelskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,644 [INFO] fetcher: [Города лайв][astrakhan_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,645 [INFO] fetcher: [Города лайв][balashikha_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,646 [INFO] fetcher: [Города лайв][barnaul_lajv_altajskij_kraj] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,648 [INFO] fetcher: [Города лайв][belgorod_lajv_belgorodskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,649 [INFO] fetcher: [Города лайв][blagoveschensk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,650 [INFO] fetcher: [Города лайв][bryansk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,652 [INFO] fetcher: [Города лайв][velikij_novgorod_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,653 [INFO] fetcher: [Города лайв][vladivostok_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,655 [INFO] fetcher: [Города лайв][vladikavkaz_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,656 [INFO] fetcher: [Города лайв][vladimir_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,657 [INFO] fetcher: [Города лайв][volgograd_lajv_volgogradskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,658 [INFO] fetcher: [Города лайв][volzhskij_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,659 [INFO] fetcher: [Города лайв][vologda_lajv_vologodskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,660 [INFO] fetcher: [Города лайв][voronezh_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,661 [INFO] fetcher: [Города лайв][ekaterinburg_lajv_sverdlovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,662 [INFO] fetcher: [Города лайв][ivanovo_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,663 [INFO] fetcher: [Города лайв][izhevsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,664 [INFO] fetcher: [Города лайв][irkutsk_lajv_irkutskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,665 [INFO] fetcher: [Города лайв][joshkar_ola_lajv_respublika_marij_el] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,666 [INFO] fetcher: [Города лайв][kazan_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,667 [INFO] fetcher: [Города лайв][kaliningrad_laj] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,668 [INFO] fetcher: [Города лайв][kaluga_lajv_k] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,669 [INFO] fetcher: [Города лайв][kamensk_uralskij_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,670 [INFO] fetcher: [Города лайв][kemerovo_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,671 [INFO] fetcher: [Города лайв][kirov_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,672 [INFO] fetcher: [Города лайв][kostroma_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,673 [INFO] fetcher: [Города лайв][krasnodar_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,674 [INFO] fetcher: [Города лайв][krasnoyarsk_lajv_krasnoyarskij_kraj] Очередь 5/4 — добор не нужен
+2026-09-02 18:41:31,675 [INFO] fetcher: [Города лайв][krym_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,676 [INFO] fetcher: [Города лайв][kurgan_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 18:41:31,677 [INFO] fetcher: [Города лайв][kursk_lajv_kurskaya_oblast] Очередь 6/4 — добор не нужен
+2026-09-02 18:41:31,678 [INFO] fetcher: [Города лайв][lipetsk_lajv_lipetskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,679 [INFO] fetcher: [Города лайв][magnitogorsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,680 [INFO] fetcher: [Города лайв][majkop_lajv_respublika_adygeya] Очередь 6/4 — добор не нужен
+2026-09-02 18:41:31,681 [INFO] fetcher: [Города лайв][moskva_lajv_moskovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,682 [INFO] fetcher: [Города лайв][murmansk_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 18:41:31,683 [INFO] fetcher: [Города лайв][naberezhnye_cheln] Очередь 6/4 — добор не нужен
+2026-09-02 18:41:31,684 [INFO] fetcher: [Города лайв][nalchik_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,685 [INFO] fetcher: [Города лайв][nizhnekamsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,686 [INFO] fetcher: [Города лайв][nizhnij_novgorod_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,687 [INFO] fetcher: [Города лайв][novokuznetsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,689 [INFO] fetcher: [Города лайв][novorossijsk_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 18:41:31,690 [INFO] fetcher: [Города лайв][novosibirsk_lajv_novosibirskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,691 [INFO] fetcher: [Города лайв][omsk_lajv_omskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,692 [INFO] fetcher: [Города лайв][orenburg_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 18:41:31,693 [INFO] fetcher: [Города лайв][orsk_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 18:41:31,694 [INFO] fetcher: [Города лайв][oryol_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 18:41:31,695 [INFO] fetcher: [Города лайв][penza_lajv_penzenskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-02 18:41:31,696 [INFO] fetcher: [Города лайв][perm_lajv_permskij_kraj] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,697 [INFO] fetcher: [Города лайв][petrozavodsk_la] Очередь 5/4 — добор не нужен
+2026-09-02 18:41:31,698 [INFO] fetcher: [Города лайв][podolsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,699 [INFO] fetcher: [Города лайв][pskov_lajv_pskovskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-02 18:41:31,700 [INFO] fetcher: [Города лайв][rostov_na_donu_2] Очередь 6/4 — добор не нужен
+2026-09-02 18:41:31,701 [INFO] fetcher: [Города лайв][ryazan_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,701 [INFO] fetcher: [Города лайв][samara_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 18:41:31,702 [INFO] fetcher: [Города лайв][sankt_peterburg_lajv_leningradskaya_obla] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,703 [INFO] fetcher: [Города лайв][saransk_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 18:41:31,704 [INFO] fetcher: [Города лайв][saratov_i_engels_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,705 [INFO] fetcher: [Города лайв][sevastopol_laj] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,707 [INFO] fetcher: [Города лайв][sochi_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 18:41:31,709 [INFO] fetcher: [Города лайв][stavropol_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 18:41:31,710 [INFO] fetcher: [Города лайв][surgut_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 18:41:31,712 [INFO] fetcher: [Города лайв][syktyvkar_lajv_respublika_komi] Очередь 5/4 — добор не нужен
+2026-09-02 18:41:31,713 [INFO] fetcher: [Города лайв][taganrog_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 18:41:31,714 [INFO] fetcher: [Города лайв][tambov_lajv_tambovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,715 [INFO] fetcher: [Города лайв][tver_lajv_tverskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-02 18:41:31,715 [INFO] fetcher: [Города лайв][tolyatti_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,716 [INFO] fetcher: [Города лайв][tomsk_lajv_tomskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,717 [INFO] fetcher: [Города лайв][tula_lajv_tulskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,718 [INFO] fetcher: [Города лайв][tyumen_lajv_tyumenskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-02 18:41:31,719 [INFO] fetcher: [Города лайв][ulan_ude_lajv] Очередь 6/4 — добор не нужен
+2026-09-02 18:41:31,720 [INFO] fetcher: [Города лайв][ulyanovsk_lajv_ulyanovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,721 [INFO] fetcher: [Города лайв][ufa_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,722 [INFO] fetcher: [Города лайв][khabarovsk_lajv_khabarovskij_kraj] Очередь 6/4 — добор не нужен
+2026-09-02 18:41:31,722 [INFO] fetcher: [Города лайв][cheboksary_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 18:41:31,724 [INFO] fetcher: [Города лайв][chelyabinsk_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 18:41:31,725 [INFO] fetcher: [Города лайв][chita_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,726 [INFO] fetcher: [Города лайв][yakutsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-02 18:41:31,727 [INFO] fetcher: [Города лайв][yaroslavl_lajv] Очередь 5/4 — добор не нужен
+2026-09-02 18:41:31,747 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-02 18:41:31,748 [INFO] fetcher: [Города в MAX][rybinsk_v_max] Очередь 4/4 — добор не нужен
+✅ Добавлено в очередь: 14 постов
+2026-09-03 00:34:09,818 [INFO] __main__: === Сбор контента ===
+2026-09-03 00:34:11,490 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-03 00:34:11,491 [INFO] fetcher: [Города России][abakan] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,492 [INFO] fetcher: [Города России][achinsk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,493 [INFO] fetcher: [Города России][almetevsk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,494 [INFO] fetcher: [Города России][angarsk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,495 [INFO] fetcher: [Города России][arkhangelsk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,496 [INFO] fetcher: [Города России][armavir] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,497 [INFO] fetcher: [Города России][artyom] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,498 [INFO] fetcher: [Города России][arzamas] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,499 [INFO] fetcher: [Города России][astrakhan] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,500 [INFO] fetcher: [Города России][balakovo] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,501 [INFO] fetcher: [Города России][balashikha] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,502 [INFO] fetcher: [Города России][barnaul] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,503 [INFO] fetcher: [Города России][bataysk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,503 [INFO] fetcher: [Города России][belgorod] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,504 [INFO] fetcher: [Города России][berezniki] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,505 [INFO] fetcher: [Города России][biysk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,506 [INFO] fetcher: [Города России][blagoveschensk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,507 [INFO] fetcher: [Города России][bratsk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,508 [INFO] fetcher: [Города России][bryansk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,509 [INFO] fetcher: [Города России][cheboksary] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,510 [INFO] fetcher: [Города России][chelyabinsk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,511 [INFO] fetcher: [Города России][cherepovets] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,512 [INFO] fetcher: [Города России][cherkessk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,513 [INFO] fetcher: [Города России][chita] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,514 [INFO] fetcher: [Города России][domodedovo] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,515 [INFO] fetcher: [Города России][donetsk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,517 [INFO] fetcher: [Города России][dzerzhinsk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,518 [INFO] fetcher: [Города России][ekaterinburg] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,519 [INFO] fetcher: [Города России][elektrostal] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,520 [INFO] fetcher: [Города России][elets] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,521 [INFO] fetcher: [Города России][elista] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,522 [INFO] fetcher: [Города России][essentuki] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,523 [INFO] fetcher: [Города России][gatchina] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,524 [INFO] fetcher: [Города России][glazov] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,525 [INFO] fetcher: [Города России][gubkin] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,526 [INFO] fetcher: [Города России][irkutsk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,526 [INFO] fetcher: [Города России][ivanovo] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,527 [INFO] fetcher: [Города России][izhevsk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,528 [INFO] fetcher: [Города России][kaliningrad] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,530 [INFO] fetcher: [Города России][kaluga] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,531 [INFO] fetcher: [Города России][kamensk_uralskiy] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,531 [INFO] fetcher: [Города России][kamyshin] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,532 [INFO] fetcher: [Города России][kazan] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,533 [INFO] fetcher: [Города России][kemerovo] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,534 [INFO] fetcher: [Города России][khabarovsk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,535 [INFO] fetcher: [Города России][novokuybyshevsk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,536 [INFO] fetcher: [Города России][samara] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,537 [INFO] fetcher: [Города России][sarapul] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,538 [INFO] fetcher: [Города России][saratov] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,540 [INFO] fetcher: [Города России][syzran] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,541 [INFO] fetcher: [Города России][tolyatti] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,542 [INFO] fetcher: [Города России][ulyanovsk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,543 [INFO] fetcher: [Города России][votkinsk] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,557 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-03 00:34:11,559 [INFO] fetcher: [Контент][dom] Очередь 8/8 — добор не нужен
+2026-09-03 00:34:11,560 [INFO] fetcher: [Контент][vyazanie] Очередь 8/8 — добор не нужен
+2026-09-03 00:34:11,561 [INFO] fetcher: [Контент][moda] Очередь 8/8 — добор не нужен
+2026-09-03 00:34:11,574 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-03 00:34:11,576 [INFO] fetcher: [Дача и Вязание][dachnyj_ugolok_2] Очередь 12/12 — добор не нужен
+2026-09-03 00:34:11,577 [INFO] fetcher: [Дача и Вязание][skhemy_vyazaniya_3] Очередь 12/12 — добор не нужен
+2026-09-03 00:34:11,578 [INFO] fetcher: [Дача и Вязание][nash_dom_2] Очередь 15/12 — добор не нужен
+2026-09-03 00:34:11,579 [INFO] fetcher: [Дача и Вязание][masterskaya_vyaza_2] Очередь 12/12 — добор не нужен
+2026-09-03 00:34:11,580 [INFO] fetcher: [Дача и Вязание][dachniki_2] Очередь 12/12 — добор не нужен
+2026-09-03 00:34:11,581 [INFO] fetcher: [Дача и Вязание][dom_povara_2] Очередь 12/12 — добор не нужен
+2026-09-03 00:34:11,596 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-03 00:34:11,597 [INFO] fetcher: [Города лайв][abakan_lajv_respublika_khakasiya] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,598 [INFO] fetcher: [Города лайв][arkhangelsk_lajv_arkhangelskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,599 [INFO] fetcher: [Города лайв][astrakhan_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,600 [INFO] fetcher: [Города лайв][balashikha_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,601 [INFO] fetcher: [Города лайв][barnaul_lajv_altajskij_kraj] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,602 [INFO] fetcher: [Города лайв][belgorod_lajv_belgorodskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,603 [INFO] fetcher: [Города лайв][blagoveschensk_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,604 [INFO] fetcher: [Города лайв][bryansk_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,605 [INFO] fetcher: [Города лайв][velikij_novgorod_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,606 [INFO] fetcher: [Города лайв][vladivostok_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,607 [INFO] fetcher: [Города лайв][vladikavkaz_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,608 [INFO] fetcher: [Города лайв][vladimir_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,609 [INFO] fetcher: [Города лайв][volgograd_lajv_volgogradskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,610 [INFO] fetcher: [Города лайв][volzhskij_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,611 [INFO] fetcher: [Города лайв][vologda_lajv_vologodskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,612 [INFO] fetcher: [Города лайв][voronezh_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,613 [INFO] fetcher: [Города лайв][ekaterinburg_lajv_sverdlovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,614 [INFO] fetcher: [Города лайв][ivanovo_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,615 [INFO] fetcher: [Города лайв][izhevsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,616 [INFO] fetcher: [Города лайв][irkutsk_lajv_irkutskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,617 [INFO] fetcher: [Города лайв][joshkar_ola_lajv_respublika_marij_el] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,618 [INFO] fetcher: [Города лайв][kazan_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,619 [INFO] fetcher: [Города лайв][kaliningrad_laj] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,620 [INFO] fetcher: [Города лайв][kaluga_lajv_k] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,621 [INFO] fetcher: [Города лайв][kamensk_uralskij_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,622 [INFO] fetcher: [Города лайв][kemerovo_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,623 [INFO] fetcher: [Города лайв][kirov_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,624 [INFO] fetcher: [Города лайв][kostroma_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,625 [INFO] fetcher: [Города лайв][krasnodar_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,626 [INFO] fetcher: [Города лайв][krasnoyarsk_lajv_krasnoyarskij_kraj] Очередь 5/4 — добор не нужен
+2026-09-03 00:34:11,628 [INFO] fetcher: [Города лайв][krym_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,629 [INFO] fetcher: [Города лайв][kurgan_lajv] Очередь 6/4 — добор не нужен
+2026-09-03 00:34:11,630 [INFO] fetcher: [Города лайв][kursk_lajv_kurskaya_oblast] Очередь 6/4 — добор не нужен
+2026-09-03 00:34:11,631 [INFO] fetcher: [Города лайв][lipetsk_lajv_lipetskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,632 [INFO] fetcher: [Города лайв][magnitogorsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,633 [INFO] fetcher: [Города лайв][majkop_lajv_respublika_adygeya] Очередь 6/4 — добор не нужен
+2026-09-03 00:34:11,633 [INFO] fetcher: [Города лайв][moskva_lajv_moskovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,635 [INFO] fetcher: [Города лайв][murmansk_lajv] Очередь 5/4 — добор не нужен
+2026-09-03 00:34:11,636 [INFO] fetcher: [Города лайв][naberezhnye_cheln] Очередь 6/4 — добор не нужен
+2026-09-03 00:34:11,637 [INFO] fetcher: [Города лайв][nalchik_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,638 [INFO] fetcher: [Города лайв][nizhnekamsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,639 [INFO] fetcher: [Города лайв][nizhnij_novgorod_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,640 [INFO] fetcher: [Города лайв][novokuznetsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,641 [INFO] fetcher: [Города лайв][novorossijsk_lajv] Очередь 6/4 — добор не нужен
+2026-09-03 00:34:11,642 [INFO] fetcher: [Города лайв][novosibirsk_lajv_novosibirskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,643 [INFO] fetcher: [Города лайв][omsk_lajv_omskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,644 [INFO] fetcher: [Города лайв][orenburg_lajv] Очередь 6/4 — добор не нужен
+2026-09-03 00:34:11,645 [INFO] fetcher: [Города лайв][orsk_lajv] Очередь 6/4 — добор не нужен
+2026-09-03 00:34:11,646 [INFO] fetcher: [Города лайв][oryol_lajv] Очередь 6/4 — добор не нужен
+2026-09-03 00:34:11,647 [INFO] fetcher: [Города лайв][penza_lajv_penzenskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-03 00:34:11,648 [INFO] fetcher: [Города лайв][perm_lajv_permskij_kraj] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,649 [INFO] fetcher: [Города лайв][petrozavodsk_la] Очередь 5/4 — добор не нужен
+2026-09-03 00:34:11,650 [INFO] fetcher: [Города лайв][podolsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,651 [INFO] fetcher: [Города лайв][pskov_lajv_pskovskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-03 00:34:11,652 [INFO] fetcher: [Города лайв][rostov_na_donu_2] Очередь 6/4 — добор не нужен
+2026-09-03 00:34:11,653 [INFO] fetcher: [Города лайв][ryazan_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,654 [INFO] fetcher: [Города лайв][samara_lajv] Очередь 5/4 — добор не нужен
+2026-09-03 00:34:11,655 [INFO] fetcher: [Города лайв][sankt_peterburg_lajv_leningradskaya_obla] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,656 [INFO] fetcher: [Города лайв][saransk_lajv] Очередь 5/4 — добор не нужен
+2026-09-03 00:34:11,657 [INFO] fetcher: [Города лайв][saratov_i_engels_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,658 [INFO] fetcher: [Города лайв][sevastopol_laj] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,659 [INFO] fetcher: [Города лайв][sochi_lajv] Очередь 5/4 — добор не нужен
+2026-09-03 00:34:11,660 [INFO] fetcher: [Города лайв][stavropol_lajv] Очередь 6/4 — добор не нужен
+2026-09-03 00:34:11,661 [INFO] fetcher: [Города лайв][surgut_lajv] Очередь 5/4 — добор не нужен
+2026-09-03 00:34:11,662 [INFO] fetcher: [Города лайв][syktyvkar_lajv_respublika_komi] Очередь 5/4 — добор не нужен
+2026-09-03 00:34:11,663 [INFO] fetcher: [Города лайв][taganrog_lajv] Очередь 6/4 — добор не нужен
+2026-09-03 00:34:11,664 [INFO] fetcher: [Города лайв][tambov_lajv_tambovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,665 [INFO] fetcher: [Города лайв][tver_lajv_tverskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-03 00:34:11,666 [INFO] fetcher: [Города лайв][tolyatti_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,667 [INFO] fetcher: [Города лайв][tomsk_lajv_tomskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,668 [INFO] fetcher: [Города лайв][tula_lajv_tulskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,669 [INFO] fetcher: [Города лайв][tyumen_lajv_tyumenskaya_oblast] Очередь 5/4 — добор не нужен
+2026-09-03 00:34:11,670 [INFO] fetcher: [Города лайв][ulan_ude_lajv] Очередь 6/4 — добор не нужен
+2026-09-03 00:34:11,671 [INFO] fetcher: [Города лайв][ulyanovsk_lajv_ulyanovskaya_oblast] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,672 [INFO] fetcher: [Города лайв][ufa_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,673 [INFO] fetcher: [Города лайв][khabarovsk_lajv_khabarovskij_kraj] Очередь 6/4 — добор не нужен
+2026-09-03 00:34:11,674 [INFO] fetcher: [Города лайв][cheboksary_lajv] Очередь 5/4 — добор не нужен
+2026-09-03 00:34:11,675 [INFO] fetcher: [Города лайв][chelyabinsk_lajv] Очередь 5/4 — добор не нужен
+2026-09-03 00:34:11,676 [INFO] fetcher: [Города лайв][chita_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,677 [INFO] fetcher: [Города лайв][yakutsk_lajv] Очередь 4/4 — добор не нужен
+2026-09-03 00:34:11,678 [INFO] fetcher: [Города лайв][yaroslavl_lajv] Очередь 5/4 — добор не нужен
+2026-09-03 00:34:11,693 [INFO] cost_log: OPENAI-MIGRATE: claude->gpt-5.6-luna dlya content-bot/rewrite
+2026-09-03 00:34:11,695 [INFO] fetcher: [Города в MAX][rybinsk_v_max] Очередь 4/4 — добор не нужен
+✅ Добавлено в очередь: 0 постов

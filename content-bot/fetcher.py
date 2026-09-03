@@ -535,8 +535,7 @@ def fetch_grid(config: dict, grid_name: str) -> int:
             try:
                 _fp = _fetch_pages_for(config, grid_name, channel)
                 _max_age = _source_max_age_days(config, channel)
-                posts = telegram.fetch_channel(channel, max_posts=_fp * 20, max_pages=_fp,
-                                                download_media=True)
+                posts = _fetch_source_posts(channel, _fp, niche)
                 for p in posts:
                     if added >= channel_limit:
                         break
@@ -597,6 +596,97 @@ def fetch_grid(config: dict, grid_name: str) -> int:
         added_total += added
 
     return added_total
+
+
+_MAX_FEED_DB = os.environ.get(
+    "MAX_FEED_DB", "/home/openclaw/.openclaw/workspace/max-userbot/max_feed.db")
+
+
+def _fetch_max_feed(chat_id: int) -> list:
+    """Кандидаты из общей max_feed.db (наполняет max-userbot/max_bake_feed.py).
+
+    Формат совпадает с telegram.fetch_channel, чтобы дальше по конвейеру
+    ничего не различало источник. media_url помечен mxfile://<путь> — файл
+    лежит в кэше юзербота и копируется в наш при скачивании.
+    """
+    import sqlite3 as _sq
+    from datetime import datetime as _dt, timezone as _tz
+    out = []
+    if not os.path.exists(_MAX_FEED_DB):
+        return out
+    try:
+        conn = _sq.connect(_MAX_FEED_DB)
+        rows = conn.execute(
+            "SELECT msg_id, text, media_type, media_path, is_ad, pub_ts, "
+            "views, reactions FROM max_feed WHERE chat_id=? AND is_ad=0 "
+            "AND media_path IS NOT NULL ORDER BY msg_id DESC LIMIT 200",
+            (chat_id,)).fetchall()
+        conn.close()
+    except Exception as e:
+        logger.error(f"max_feed read {chat_id}: {e}")
+        return out
+    for msg_id, text, mtype, mpath, is_ad, pub_ts, views, reactions in rows:
+        out.append({
+            "source_url": f"max://{chat_id}/{msg_id}",
+            "text": text or "",
+            "media_type": mtype,
+            "media_url": ("mxfile://" + mpath) if mpath else None,
+            "media_files": (["mxfile://" + mpath] if mpath else []),
+            "pub_time": (_dt.fromtimestamp(pub_ts, _tz.utc) if pub_ts else None),
+            "views": views or 0, "reactions": reactions or 0, "forwards": None,
+        })
+    return out
+
+
+def _materialize_mxfile(m_url, media_type):
+    """mxfile://<путь юзербота> -> копия в НАШЕМ кэше (или None, если файла нет).
+
+    Своя копия обязательна: юзербот чистит свои файлы быстрее, чем очередь
+    доходит до слота, иначе публикация падает в media_file_missing.
+    """
+    if not m_url or not str(m_url).startswith("mxfile://"):
+        return None
+    import hashlib as _hl
+    import shutil as _sh
+    src = str(m_url)[len("mxfile://"):]
+    dst_dir = telegram.MEDIA_DIR
+    ext = ".mp4" if media_type == "video" else ".jpg"
+    dst = os.path.join(dst_dir, _hl.md5(str(m_url).encode()).hexdigest() + ext)
+    try:
+        if os.path.exists(dst) and os.path.getsize(dst) > 1000:
+            return dst                      # уже копировали
+        if os.path.exists(src) and os.path.getsize(src) > 1000:
+            os.makedirs(dst_dir, exist_ok=True)
+            _sh.copy2(src, dst)
+            return dst
+    except Exception as e:
+        logger.warning(f"mxfile copy fail {src}: {e}")
+    return None
+
+
+def _fetch_source_posts(channel, pages, niche=None):
+    """Один донор -> список кандидатов. Понимает префикс mx: (каналы MAX).
+
+    16.08 выпечка встала именно потому, что mx:-донор уходил в telegram-фетчер
+    как имя канала и молча возвращал пусто.
+    """
+    if str(channel).startswith("mx:"):
+        try:
+            posts = _fetch_max_feed(int(str(channel)[3:]))
+        except (TypeError, ValueError):
+            logger.error(f"[{niche}] кривой mx-донор: {channel}")
+            return []
+        for p in posts:
+            local = _materialize_mxfile(p.get("media_url"), p.get("media_type"))
+            if local:
+                p["media_url"] = local
+                p["media_files"] = [local]
+            else:
+                p["media_url"] = None       # файл вычищен — пусть отсеет фильтр
+                p["media_files"] = []
+        return posts
+    return telegram.fetch_channel(channel, max_posts=pages * 20, max_pages=pages,
+                                  download_media=True)
 
 
 def fetch_channel(config: dict, niche: str, limit: int | None = None, grid_name: str | None = None) -> int:
@@ -671,8 +761,7 @@ def fetch_channel(config: dict, niche: str, limit: int | None = None, grid_name:
         try:
             _fp = _fetch_pages_for(config, grid_name, channel)
             _max_age = _source_max_age_days(config, channel)
-            posts = telegram.fetch_channel(channel, max_posts=_fp * 20, max_pages=_fp,
-                                            download_media=True)
+            posts = _fetch_source_posts(channel, _fp, niche)
             for p in posts:
                 if added >= limit:
                     break

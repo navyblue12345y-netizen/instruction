@@ -405,6 +405,90 @@ _RESCUE_COOLDOWN_SEC = 600         # пустой донорский день н
                                    # каждый слот в многоминутный фетч
 
 
+def _upload_tokens_for(publisher, media_url, media_files, media_type):
+    """Пред-заливка медиа в MAX ДО ad-скана. → список токенов.
+
+    [] — текстовый пост (заливать нечего); None — залить не вышло или тип
+    файла не совпал с media_type → отправлять старым путём (заливка внутри
+    post_result). Альбом токенов в post_result идёт одним типом (image или
+    video по media_type), поэтому смешанное/непонятное не рискуем."""
+    files = [f for f in (media_files or []) if f] or ([media_url] if media_url else [])
+    if not files:
+        return []
+    want = "video" if media_type == "video" else "image"
+    toks = []
+    for f in files:
+        name = str(f).split("?")[0].lower()
+        is_vid = name.endswith((".mp4", ".mov", ".m4v", ".webm"))
+        if (want == "video") != is_vid:
+            return None
+        try:
+            t = publisher.upload_file(str(f), want)
+        except Exception as _ue:
+            logger.warning(f"pre-upload {str(f)[:80]}: {_ue}")
+            return None
+        if not t:
+            return None
+        toks.append(t)
+    return toks
+
+
+def _race_safe_post(publisher, niche, channel_id, final_text, media_url,
+                    media_type, media_files, markup, text_format,
+                    slot_key, post_id, defer_cb):
+    """Заливка → живой ad-скан → POST. Возвращает 'posted'|'held'|'failed'.
+
+    14.09 (Дачный уголок 15:00): скан до заливки оставлял окно ~9с (альбом),
+    реклама, легшая в него, перекрывалась. Теперь окно скан→POST < 1с.
+    При HOLD: пост назад в pending, slot_lock СНИМАЕТСЯ (иначе отложенная
+    джоба билась в «Слот уже занят» и посты терялись — та же дыра ела
+    1-2 слота Нашего Дома ежедневно с 18.08), defer_cb(age) пере-откладывает.
+    Fail-open по скану и заливке: сбой не блокирует публикацию."""
+    try:
+        toks = _upload_tokens_for(publisher, media_url, media_files, media_type)
+    except Exception as _pe:
+        logger.warning(f"[{niche}] pre-upload fail-open: {_pe}")
+        toks = None
+    try:
+        from ad_race_guard import top_feed_foreign
+        _tf = top_feed_foreign(publisher, niche, channel_id, 60)
+    except Exception as _tfe:
+        logger.debug(f"[{niche}] live ad-check fail-open: {_tfe}")
+        _tf = None
+    if _tf:
+        try:
+            _c = db.get_conn()
+            _c.execute("UPDATE posts SET status='pending' "
+                       "WHERE id=? AND status='processing'", (post_id,))
+            _c.commit()
+            _c.close()
+        except Exception as _re:
+            logger.warning(f"[{niche}] release post #{post_id}: {_re}")
+        try:
+            db.release_slot(niche, slot_key)
+        except Exception as _rl:
+            logger.warning(f"[{niche}] release slot {slot_key}: {_rl}")
+        logger.info(f"[{niche}] AD-RACE HOLD перед отправкой: {_tf[0]} — "
+                    f"пост #{post_id} возвращён в очередь (слот освобождён)")
+        if defer_cb:
+            try:
+                defer_cb(_tf[1])
+            except Exception as _de:
+                logger.warning(f"[{niche}] defer_cb: {_de}")
+        return "held"
+    if toks:
+        res = publisher.post_result(
+            channel_id=channel_id, text=final_text, media_type=media_type,
+            markup=markup, text_format=text_format, auto_edit_check=False,
+            attachments_tokens=toks)
+        return "posted" if res.get("ok") else "failed"
+    ok = publisher.post(
+        channel_id=channel_id, text=final_text, media_url=media_url,
+        media_type=media_type, media_files=media_files, markup=markup,
+        text_format=text_format, auto_edit_check=False)
+    return "posted" if ok else "failed"
+
+
 def _publish_channel(niche: str, channel_id: int, publisher: MaxPublisher,
                      media_type_filter: str = "any", defer_cb=None,
                      rescue_fetch=None):
@@ -494,50 +578,18 @@ def _publish_channel(niche: str, channel_id: int, publisher: MaxPublisher,
             logger.debug(f"[{niche}] title format skipped: {_fe}")
         final_text, final_markup, final_format = _apply_channel_signature(niche, channel_id, text)
 
-        # DL 2026-08-04 («Наш Дом» 19:02): реклама, легшая ПОСЛЕ проверки
-        # начала слота (пока пост готовился — рерайт/заливка видео ~2 мин),
-        # видна только ЖИВЫМ сканом ленты прямо перед отправкой: watcher-детект
-        # опоздал на 0.5с. Тот же ad_race_guard, что у Лайв/prepared (31.07).
-        # При hold: пост назад в pending + defer_cb(age) пере-откладывает слот
-        # штатным deferred-механизмом (реклама+60м). Fail-open.
-        try:
-            from ad_race_guard import top_feed_foreign
-            _tf = top_feed_foreign(publisher, niche, channel_id, 60)
-        except Exception as _tfe:
-            logger.debug(f"[{niche}] live ad-check fail-open: {_tfe}")
-            _tf = None
-        if _tf:
-            try:
-                _c = db.get_conn()
-                _c.execute("UPDATE posts SET status='pending' "
-                           "WHERE id=? AND status='processing'", (post["id"],))
-                _c.commit()
-                _c.close()
-            except Exception as _re:
-                logger.warning(f"[{niche}] release post #{post['id']}: {_re}")
-            logger.info(f"[{niche}] AD-RACE HOLD перед отправкой: {_tf[0]} — "
-                        f"пост #{post['id']} возвращён в очередь")
-            if defer_cb:
-                try:
-                    defer_cb(_tf[1])
-                except Exception as _de:
-                    logger.warning(f"[{niche}] defer_cb: {_de}")
+        # DL 2026-08-04 + 14.09: заливка медиа → ЖИВОЙ скан ленты → отправка
+        # готовыми токенами (_race_safe_post). Раньше скан шёл ДО заливки:
+        # альбом из 5 фото ≈ 9с, реклама успевала лечь в эти секунды и
+        # перекрывалась (Дачный уголок 14.09 15:00). auto-edit выключен для
+        # сетки по запросу пользователя (2026-04-30).
+        _st = _race_safe_post(publisher, niche, channel_id, final_text,
+                              media_url, media_type, media_files,
+                              final_markup, final_format,
+                              slot_key, post["id"], defer_cb)
+        if _st == "held":
             return False
-
-        success = publisher.post(
-            channel_id=channel_id,
-            text=final_text,
-            media_url=media_url,
-            media_type=media_type,
-            media_files=media_files,
-            markup=final_markup,
-            text_format=final_format,
-            # FIX (2026-04-30): по запросу пользователя — для Дача и Вязание
-            # auto-edit отключён. Сетка работает на legacy-pipeline через
-            # apscheduler с собственным форматированием — auto-edit здесь
-            # не нужен.
-            auto_edit_check=False,
-        )
+        success = (_st == "posted")
 
         if success:
             db.mark_posted(post["id"])
@@ -702,7 +754,13 @@ def _unplanned_external_shift(niche: str, local_now, quiet_min: int = 60):
     try:
         seen = _dt.fromisoformat(ts)
         run_at = (seen + _td(minutes=quiet_min)).astimezone(local_now.tzinfo)
-        return run_at.replace(second=0, microsecond=0)
+        # 14.09: обрезка секунд ВНИЗ давала run_at раньше конца часа тишины
+        # (реклама 15:00:05 → сдвиг «на 16:00», гард в 16:00:01 видел age=59.9м
+        # и пере-откладывал). Теперь округляем ВВЕРХ до минуты + 1 мин запаса.
+        floored = run_at.replace(second=0, microsecond=0)
+        if run_at != floored:
+            floored += _td(minutes=1)
+        return floored + _td(minutes=1)
     except Exception as e:
         logger.debug(f"_unplanned_external_shift parse {niche}: {e}")
         return None

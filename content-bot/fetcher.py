@@ -500,11 +500,35 @@ def fetch_grid(config: dict, grid_name: str) -> int:
         # ВАЖНО: очередь pending никогда не чистим перед добором.
         # Добор только добавляет новые посты после дедуп-проверок.
 
+        # 14.09: видео-квота (channel_settings.<канал>.video_min_queue):
+        # держим в очереди минимум N видео. Мастерская Вязания 14.09 осталась
+        # на день без роликов: mx-видео разобрал sibling-дедуп в пользу Схем,
+        # а очередь была «полна» фото ещё с вечера — обычный добор молчал.
+        # Видео добираются отдельным проходом и СВЕРХ таргета очереди.
+        _vq = 0
+        try:
+            _vq = int((channel_settings.get(niche, {}) or {}).get("video_min_queue") or 0)
+        except Exception:
+            _vq = 0
+        _need_video = 0
+        if not live_mode and _vq > 0:
+            try:
+                import sqlite3 as _sq3
+                _vc = _sq3.connect(db.DB_PATH, timeout=15)
+                _vid_now = int(_vc.execute(
+                    "SELECT COUNT(*) FROM posts WHERE channel=? AND status='pending' "
+                    "AND media_type='video'", (niche,)).fetchone()[0])
+                _vc.close()
+                _need_video = max(0, _vq - _vid_now)
+            except Exception as _vqe:
+                logger.warning(f"[{grid_name}][{niche}] видео-квота: счёт не удался, пропускаю: {_vqe}")
+                _need_video = 0
+
         # Для обычного режима: держим очередь ровно до дневного таргета (по умолчанию posts_per_day)
         if not live_mode:
             pending_now = db.count_pending_posts(niche)
             need_add = max(0, int(queue_target) - int(pending_now))
-            if need_add == 0:
+            if need_add == 0 and _need_video == 0:
                 logger.info(f"[{grid_name}][{niche}] Очередь {pending_now}/{queue_target} — добор не нужен")
                 continue
             channel_limit = need_add
@@ -524,6 +548,35 @@ def fetch_grid(config: dict, grid_name: str) -> int:
                      .get("fair_source_rotation", False))
         tg_channels = _source_fetch_order(
             tg_channels, ch_cfg.get("backup_sources") or (), _fair)
+
+        # 14.09: отдельный видео-проход под квоту (см. video_min_queue выше).
+        if _need_video > 0:
+            logger.info(f"[{grid_name}][{niche}] видео-квота: не хватает {_need_video} видео — добираю")
+            try:
+                _vgot = 0
+                for _vch in tg_channels:
+                    if _vgot >= _need_video:
+                        break
+                    try:
+                        _vposts = _fetch_source_posts(
+                            _vch, _fetch_pages_for(config, grid_name, _vch), niche)
+                    except Exception as _vfe:
+                        logger.warning(f"[{grid_name}][{niche}] видео-добор {_vch}: {_vfe}")
+                        continue
+                    _vmax_age = _source_max_age_days(config, _vch)
+                    for _vp in _vposts:
+                        if _vgot >= _need_video:
+                            break
+                        if _vp.get("media_type") != "video" or not _vp.get("media_url"):
+                            continue
+                        if _post_out_of_window(_vp.get("pub_time"), _vmax_age):
+                            continue
+                        _vgot += _save(_vp, _vch, niche, ai_client, ai_provider,
+                                       do_rewrite, grid_prompt, grid_max_tokens, ch_prompt)
+                added += _vgot
+                logger.info(f"[{grid_name}][{niche}] видео-квота: добрано {_vgot}")
+            except Exception:
+                logger.exception(f"[{grid_name}][{niche}] видео-добор упал — обычный добор продолжается")
 
         # Telegram-источники.
         # download_media=True: для legacy-сетки скачиваем медиа локально, чтобы

@@ -5333,6 +5333,7 @@ channel_settings:
     media_mode: any
     rewrite: true
   skhemy_vyazaniya_3:
+    video_min_queue: 3
     # 01.09: жёсткий видео-фильтр сбора снят — у доноров свежих видео 0,
     # фото 59, канал вставал. Приоритет видео держит video_first.
     video_first: true
@@ -5493,6 +5494,7 @@ channel_settings:
       url: https://max.ru/join/cUAA093GtFkOsGNHvyJ5-Ffxg530Z8ogZHmutjEDiIg
       style: markdown
   masterskaya_vyaza_2:
+    video_min_queue: 3
     # 01.09: жёсткий видео-фильтр сбора снят — у доноров свежих видео 0,
     # фото 59, канал вставал. Приоритет видео держит video_first.
     video_first: true

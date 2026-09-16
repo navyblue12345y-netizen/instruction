@@ -729,6 +729,31 @@ def _fetch_source_posts(channel, pages, niche=None):
         except (TypeError, ValueError):
             logger.error(f"[{niche}] кривой mx-донор: {channel}")
             return []
+        # 15.09: срез хвостовой подписи донора («🧶 Вязание на каждый день»):
+        # последняя непустая строка, повторяющаяся у ≥3 постов пачки и короткая
+        # без ссылок — подпись канала-источника, вырезаем у всех постов.
+        # (14.09 ручной видео-добор шёл без канального промпта — подписи
+        # доноров утекли в эфир; теперь режем детерминированно до рерайта.)
+        try:
+            import collections as _cl
+
+            def _last_line(t):
+                for _ln in reversed((t or "").splitlines()):
+                    if _ln.strip():
+                        return _ln.strip()
+                return ""
+
+            _freq = _cl.Counter(_last_line(p.get("text")) for p in posts)
+            _sigs = {s for s, n in _freq.items()
+                     if s and n >= 3 and len(s) <= 40 and "http" not in s.lower()}
+            if _sigs:
+                for p in posts:
+                    _lines = (p.get("text") or "").splitlines()
+                    while _lines and (not _lines[-1].strip() or _lines[-1].strip() in _sigs):
+                        _lines.pop()
+                    p["text"] = "\n".join(_lines)
+        except Exception as _se:
+            logger.debug(f"[{niche}] mx signature strip: {_se}")
         for p in posts:
             local = _materialize_mxfile(p.get("media_url"), p.get("media_type"))
             if local:

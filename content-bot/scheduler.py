@@ -625,15 +625,17 @@ def _publish_channel(niche: str, channel_id: int, publisher: MaxPublisher,
 
 # ── Публикация батча для сетки ─────────────────────────────────────────────
 
-def cleanup_orphan_media():
-    """Удаляет медиафайлы не привязанные к pending постам."""
-    import sqlite3 as _sqlite3
-    import json as _json
+def _collect_active_media(conn) -> set:
+    """Файлы, которые чистилке трогать НЕЛЬЗЯ.
 
-    conn = _sqlite3.connect(db.DB_PATH)
+    15.09: раньше учитывалась только legacy-таблица posts — файлы кандидатов
+    и готовящихся постов Лайв/вМАКС (candidate_pool, prepared_posts) были для
+    чистилки «сиротами» и выносились до публикации: 25 постов за полдня 15.09
+    ушли текстом без фото (Тобольск 07:34 — редактор заменяла руками)."""
+    import json as _json
     cur = conn.cursor()
-    cur.execute("SELECT media_url, media_files FROM posts WHERE status IN ('pending','processing')")
     active = set()
+    cur.execute("SELECT media_url, media_files FROM posts WHERE status IN ('pending','processing')")
     for row in cur.fetchall():
         if row[0]: active.add(row[0])
         if row[1]:
@@ -642,6 +644,35 @@ def cleanup_orphan_media():
                     if f: active.add(f)
             except Exception:
                 pass
+    try:
+        cur.execute("SELECT media_url FROM candidate_pool WHERE used_at IS NULL "
+                    "AND fetched_at >= datetime('now', '-3 days')")
+        for row in cur.fetchall():
+            if row[0]: active.add(row[0])
+    except Exception as _e:
+        logger.debug(f"cleanup: candidate_pool пропущен: {_e}")
+    try:
+        cur.execute("SELECT media_url, media_files_json FROM prepared_posts "
+                    "WHERE status IN ('pending','preparing','ready')")
+        for mu, mfj in cur.fetchall():
+            if mu: active.add(mu)
+            if mfj:
+                try:
+                    for f in _json.loads(mfj):
+                        if f: active.add(f)
+                except Exception:
+                    pass
+    except Exception as _e:
+        logger.debug(f"cleanup: prepared_posts пропущен: {_e}")
+    return active
+
+
+def cleanup_orphan_media():
+    """Удаляет медиафайлы не привязанные к pending постам."""
+    import sqlite3 as _sqlite3
+
+    conn = _sqlite3.connect(db.DB_PATH)
+    active = _collect_active_media(conn)
     conn.close()
 
     media_dir = os.path.join(os.path.dirname(__file__), "media")

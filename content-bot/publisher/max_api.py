@@ -197,7 +197,8 @@ class MaxPublisher:
 
     def upload_file(self, file_path: str, file_type: str = "image") -> str | None:
         """Загружает файл в MAX и возвращает token для вложения."""
-        upload_type = "video" if file_type == "video" else "image"
+        # 16.09: + audio (песни/подкасты из tg-источников; MAX /uploads type=audio жив)
+        upload_type = file_type if file_type in ("video", "audio") else "image"
         # Шаг 1: получаем upload URL через POST /uploads
         result = self._request("POST", "/uploads", params={"type": upload_type})
         if not result or "url" not in result:
@@ -211,7 +212,7 @@ class MaxPublisher:
         if file_path.startswith("http"):
             try:
                 import tempfile
-                ext = ".mp4" if upload_type == "video" else ".jpg"
+                ext = {"video": ".mp4", "audio": ".mp3"}.get(upload_type, ".jpg")
                 tmp_path = tempfile.mktemp(suffix=ext)
                 _dl_headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/121.0.0.0"}
                 # 2026-05-14: bezformata.com и подобные требуют Referer для CDN media (anti-hotlinking)
@@ -673,7 +674,7 @@ class MaxPublisher:
             for tok in attachments_tokens:
                 if not tok:
                     continue
-                att_type = "video" if media_type == "video" else "image"
+                att_type = media_type if media_type in ("video", "audio") else "image"
                 attachments.append({"type": att_type, "payload": {"token": tok}})
         else:
             # EXISTING UPLOAD-BASED PATH — полностью сохранён без изменений.
@@ -711,7 +712,7 @@ class MaxPublisher:
                         import time as _time
                         _time.sleep(3)
                 if file_token:
-                    att_type = "video" if media_type == "video" else "image"
+                    att_type = media_type if media_type in ("video", "audio") else "image"
                     attachments.append({"type": att_type, "payload": {"token": file_token}})
                 else:
                     logger.warning(f"Медиа не загрузилось после 3 попыток: {fpath[:50]}")

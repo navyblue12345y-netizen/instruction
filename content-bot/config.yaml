@@ -7428,3 +7428,7 @@ bpla_alerts:
   # 26.08 (yuzer): raskat na VSE kanaly obeikh setok — 252 s geo.
   # Spisok 92 snyat; '*' = vse aktivnye. Vernut vyborochno: spisok iz bekapa.
   channels: '*'
+
+# 16.09: kanaly, gde postam bez media dobiraem vlozheniya userbotom (sources/telegram.py userbot_enrich_media)
+telegram_audio_enrich:
+- amurblg1

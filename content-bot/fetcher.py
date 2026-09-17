@@ -3045,3 +3045,124 @@ def _rewrite(text: str, channel: str, media_type: str = None,
         logger.warning(f"AI ({ai_provider}) недоступен: {e}")
         from processor.rewriter import _fallback_caption
         return _fallback_caption(text, channel)
+
+
+# ── 16.09: подборки-оглавления источников и тизеры со ссылкой ────────────────
+# Кейсы дня: Чита/Комсомольск (пункты-ссылки на СВОИ посты, которые мы и так
+# парсим по одному), Воронеж/СПб (vk-анонсы «утреннего дайджеста»), Рязань
+# (тизер «разбираемся с экспертом» + ссылка на полную статью ya62.ru).
+import re as _re_sd
+
+_DIGEST_WORD_RE = _re_sd.compile(r"(?i)дайджест")
+_DIGEST_TITLE_RE = _re_sd.compile(
+    r"(?i)(^|\n)\s*[^\n]{0,40}("
+    r"главное\b|главные\s+(темы|новости)|итоги\s+(дня|недели|суток)|"
+    r"могли\s+пропустить|коротко\s+о\s+главном|"
+    r"(утренн|вечерн|дневн)\w*\s+(сводк|выпуск|обзор)|обзор\s+дня|"
+    r"(последние|главные)\s+новости[^\n]{0,40}(на\s+(утро|вечер)|к\s+этому\s+часу|за\s+день)"
+    r")")
+# пункт С текстом ИЛИ голый маркер отдельной строкой (Чита: «📌»/«🟦» строками)
+_DIGEST_BULLET_RE = _re_sd.compile(r"(?m)^\s*[•▪◾◽🔹🔸🔻🔺🟦🟥🟩📌ꔷ◦‣](\s*\S|\s*$)")
+_URL_IN_TEXT_RE = _re_sd.compile(r"https?://\S+")
+
+_TEASER_ARTICLE_SKIP = (
+    "t.me/", "telegram.me", "tg://", "max.ru/", "vk.com/", "ok.ru/",
+    "instagram.com", "youtube.com", "youtu.be", "wa.me/", "whatsapp",
+    "viber", "dzen.ru/id", "zen.yandex", "apps.apple", "play.google",
+)
+
+
+def _post_article_links(post) -> list:
+    """Внешние «статейные» ссылки поста: из text_links (tg) или из текста (vk)."""
+    urls = []
+    for l in (post.get("text_links") or []):
+        u = (l.get("url") or "").strip()
+        if u:
+            urls.append(u)
+    if not urls:
+        urls = _URL_IN_TEXT_RE.findall(post.get("text") or "")
+    out = []
+    for u in urls:
+        low = u.lower().rstrip(").,»")
+        if any(s in low for s in _TEASER_ARTICLE_SKIP):
+            continue
+        out.append(u.rstrip(").,»"))
+    return out
+
+
+def is_source_digest(post) -> bool:
+    """Пост-оглавление источника («дайджест», «итоги дня», «могли пропустить»).
+
+    Такие НЕ постим: первоисточники пунктов приходят отдельными постами
+    (Чита: каждый пункт — ссылка t.me на пост того же канала). Правило:
+    слово «дайджест» в шапке — верняк; иначе 2 из 3 признаков: заголовок-
+    маркер, ≥3 строк-пунктов, ≥3 ссылок в тексте поста."""
+    t = (post.get("text") or "").strip()
+    if not t:
+        return False
+    head = t[:120]
+    if _DIGEST_WORD_RE.search(head):
+        return True
+    links_n = len(post.get("text_links") or []) or len(_URL_IN_TEXT_RE.findall(t))
+    score = 0
+    if _DIGEST_TITLE_RE.search("\n" + head):
+        score += 1
+    bullets = len(_DIGEST_BULLET_RE.findall(t))
+    if bullets >= 3:
+        score += 1
+    if links_n >= 3:
+        score += 1
+    # 4+ пунктов-строк — подборка и без заголовка-маркера (Чита: слово
+    # «ГЛАВНОЕ» было картинкой-плашкой и в текст не попало)
+    return score >= 2 or bullets >= 4
+
+
+def _fetch_article_text(url: str, timeout: float = 8.0) -> str | None:
+    """Полный текст статьи по URL (для разворота тизеров). Fail-open → None."""
+    try:
+        import requests as _rq
+        import trafilatura as _trafi
+        r = _rq.get(url, headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124.0",
+            "Accept": "text/html,application/xhtml+xml",
+            "Accept-Language": "ru-RU,ru;q=0.9",
+        }, timeout=timeout, allow_redirects=True)
+        if r.status_code != 200 or len(r.content) < 500:
+            return None
+        _enc = r.encoding
+        if not _enc or _enc.lower() in ("iso-8859-1", "latin-1"):
+            # ya62.ru: charset не отдан заголовком — без apparent_encoding кракозябры
+            _enc = r.apparent_encoding or "utf-8"
+        _html = r.content.decode(_enc, errors="replace")
+        txt = _trafi.extract(_html, include_comments=False, include_tables=False,
+                             favor_recall=True) or ""
+        txt = txt.strip()
+        return txt if len(txt) >= 200 else None
+    except Exception as e:
+        logger.debug(f"[teaser-expand] fetch fail {url[:80]}: {e}")
+        return None
+
+
+TEASER_MAX_LEN = 240
+
+
+def expand_teaser_post(post) -> bool:
+    """Короткий тизер со ссылкой на статью → подменяем текст полной статьёй.
+
+    Рязань 16.09: «Разбираемся с экспертом» 132 зн. + ссылка ya62.ru — раньше
+    ссылка выбрасывалась и в эфир шёл пост ни о чём. Медиа поста сохраняется.
+    True — развернули (post['text'] заменён, метка expanded_from)."""
+    t = (post.get("text") or "").strip()
+    if not t or len(t) > TEASER_MAX_LEN:
+        return False
+    if is_source_digest(post):
+        return False
+    links = _post_article_links(post)
+    if not links:
+        return False
+    full = _fetch_article_text(links[0])
+    if not full or len(full) < max(300, len(t) + 150):
+        return False
+    post["text"] = full[:3500]
+    post["expanded_from"] = links[0]
+    return True

@@ -149,6 +149,15 @@ def _parse_msg(msg, download_media: bool = False) -> dict | None:
 
     text_el = msg.select_one("div.tgme_widget_message_text")
     _raw_hrefs = [(a.get("href") or "") for a in text_el.select("a[href]")] if text_el else []
+    # 16.09: гиперссылки из текста РАНЬШЕ выбрасывались (использовались только
+    # для ad-гейта) — тизеры теряли ссылку на полную статью (Рязань ya62),
+    # подборки — ссылки на первоисточники (Чита). Сохраняем пары label+url.
+    text_links = []
+    if text_el:
+        for _a in text_el.select("a[href]"):
+            _h = (_a.get("href") or "").strip()
+            if _h.startswith("http"):
+                text_links.append({"label": _a.get_text(" ", strip=True)[:80], "url": _h})
     text = _clean_text(text_el) if text_el else ""
 
     # Inline кнопки с URL (сигнал рекламы)
@@ -200,6 +209,13 @@ def _parse_msg(msg, download_media: bool = False) -> dict | None:
                     media_files.append(src)
                     media_type = "video"
 
+    # 16.09 (Ростов etorostov/135426): крупное видео web-превью отдаёт как
+    # «толстый плеер» БЕЗ <video src> — раньше пост выходил голым текстом.
+    # Помечаем: юзербот-дозаборщик скачает файл через MTProto.
+    has_video_player = bool(
+        msg.select(".tgme_widget_message_video_player, i.tgme_widget_message_video_thumb")
+    ) and not msg.select("video[src]")
+
     if not text and not media_files:
         return None
 
@@ -212,6 +228,8 @@ def _parse_msg(msg, download_media: bool = False) -> dict | None:
         "pub_time": pub_time,
         "has_inline_url_buttons": bool(inline_url_buttons),
         "inline_url_buttons": inline_url_buttons,
+        "text_links": text_links,
+        "has_video_player": has_video_player and not media_files,
     }
 
 
@@ -296,3 +314,173 @@ def fetch_channel(channel: str, max_posts: int = 10, max_pages: int = 1,
         logger.error(f"TG @{channel}: {e}")
 
     return results
+
+
+# ── 16.09: юзербот-дозаборщик вложений (общая tg-сессия с chef-форком) ──────
+_UB_SESSION_DEFAULT = "/home/openclaw/.openclaw/workspace/tg_userbot/ikigai_userbot"
+_UB_CHEF_ENV = "/home/openclaw/.openclaw/workspace/content-bot-client-chef/.env"
+_UB_FLOCK_TIMEOUT_SEC = 120
+_UB_MAX_FILE_BYTES = 48 * 1024 * 1024        # аудио: лимит MAX на вложение
+_UB_MAX_VIDEO_BYTES = 80 * 1024 * 1024       # видео: качаем крупнее — при заливке
+                                             # публикатор сожмёт ffmpeg'ом (max_api._shrink)
+_AUDIO_EXT = {"audio/mpeg": ".mp3", "audio/mp3": ".mp3", "audio/ogg": ".ogg",
+              "audio/x-m4a": ".m4a", "audio/mp4": ".m4a", "audio/flac": ".flac",
+              "audio/x-wav": ".wav"}
+
+
+def _ub_session_path() -> str:
+    return os.environ.get("TG_USERBOT_SESSION", _UB_SESSION_DEFAULT)
+
+
+def _ub_env(name: str) -> str:
+    """env процесса, а если пусто — .env chef-форка (общий юзербот)."""
+    v = os.environ.get(name, "")
+    if v:
+        return v
+    try:
+        for line in open(_UB_CHEF_ENV, encoding="utf-8"):
+            line = line.strip()
+            if line.startswith(name + "="):
+                return line.split("=", 1)[1].strip().strip('"').strip("'")
+    except Exception:
+        pass
+    return ""
+
+
+def _flock_or_timeout(fh, timeout_sec: int):
+    import fcntl, time as _t
+    deadline = _t.monotonic() + timeout_sec
+    while True:
+        try:
+            fcntl.flock(fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            return
+        except OSError:
+            if _t.monotonic() >= deadline:
+                raise TimeoutError("userbot session flock busy")
+            _t.sleep(1.0)
+
+
+def userbot_enrich_media(channel: str, posts: list, want_audio: bool = False,
+                         max_downloads: int = 3, max_age_hours: float = 48.0,
+                         client_factory=None) -> int:
+    """Батч-дозабор вложений через tg-юзербот (ОДИН get_messages на канал).
+
+    Кому: посты с has_video_player=True (крупное видео, web-превью отдало
+    плеер без src — Ростов 16.09) и, при want_audio, посты вовсе без медиа
+    (аудио web-превью не отдаёт никак — Благовещенск/песни 16.09).
+    Скачивает файл ≤48 МБ в кэш, проставляет media_url/media_files/media_type.
+    Пост с плеером, который дозабрать не вышло, помечается media_fetch_failed
+    (вызывающий не должен постить его голым). Fail-open: без юзербота — 0."""
+    from datetime import datetime, timezone, timedelta
+
+    todo = {}
+    now = datetime.now(timezone.utc)
+    for p in posts or []:
+        try:
+            mid = int(str(p.get("source_url", "")).rstrip("/").rsplit("/", 1)[-1])
+        except Exception:
+            continue
+        pt = p.get("pub_time")
+        if pt is not None and (now - pt) > timedelta(hours=max_age_hours):
+            continue
+        if p.get("has_video_player"):
+            todo[mid] = (p, "video")
+        elif want_audio and not p.get("media_files") and (p.get("text") or "").strip():
+            todo[mid] = (p, "audio?")
+    if not todo:
+        return 0
+
+    api_id = _ub_env("TG_USERBOT_API_ID")
+    api_hash = _ub_env("TG_USERBOT_API_HASH")
+    if not api_id or not api_hash:
+        logger.debug("[ub-enrich] нет TG_USERBOT_API_ID/HASH — пропуск")
+        return 0
+
+    os.makedirs(MEDIA_DIR, exist_ok=True)
+    enriched = 0
+    try:
+        import fcntl  # noqa: F401 — гарантируем POSIX
+        _lk = open(_ub_session_path() + ".flock", "w")
+        try:
+            _flock_or_timeout(_lk, _UB_FLOCK_TIMEOUT_SEC)
+        except TimeoutError:
+            _lk.close()
+            logger.warning("[ub-enrich] @%s: сессия юзербота занята — пропуск", channel)
+            return 0
+        try:
+            if client_factory is not None:
+                client = client_factory()
+            else:
+                from telethon.sync import TelegramClient
+                client = TelegramClient(_ub_session_path(), int(api_id), api_hash,
+                                        receive_updates=False)
+            with client:
+                msgs = client.get_messages(channel, ids=sorted(todo.keys()))
+                for m in msgs or []:
+                    if m is None or getattr(m, "id", None) not in todo:
+                        continue
+                    p, kind = todo[m.id]
+                    doc = getattr(m, "document", None)
+                    video = getattr(m, "video", None)
+                    audio = getattr(m, "audio", None) or getattr(m, "voice", None)
+                    target, ext, mtype = None, None, None
+                    _mime = ((getattr(doc, "mime_type", "") or "")).lower()
+                    _is_vid = video is not None or _mime.startswith("video/")
+                    if kind == "video" and (_is_vid or doc is not None):
+                        size = getattr(video or doc, "size", 0) or 0
+                        if size and size > _UB_MAX_VIDEO_BYTES:
+                            logger.info("[ub-enrich] @%s/%s: видео %d МБ > лимита — пропуск",
+                                        channel, m.id, size // 1048576)
+                            p["media_fetch_failed"] = True
+                            continue
+                        target, ext, mtype = m, ".mp4", "video"
+                    elif kind == "audio?" and audio is not None:
+                        size = getattr(audio, "size", 0) or 0
+                        if size and size > _UB_MAX_FILE_BYTES:
+                            continue
+                        mime = (getattr(audio, "mime_type", "") or "").lower()
+                        target, ext, mtype = m, _AUDIO_EXT.get(mime, ".mp3"), "audio"
+                    elif kind == "audio?" and _is_vid:
+                        # Благовещенск 16.09: «песни» оказались альбомом ВИДЕО
+                        # (video/mp4 61 МБ) — web-превью его вовсе не показало.
+                        size = getattr(video or doc, "size", 0) or 0
+                        if size and size > _UB_MAX_VIDEO_BYTES:
+                            continue
+                        target, ext, mtype = m, ".mp4", "video"
+                    if target is None:
+                        if kind == "video":
+                            p["media_fetch_failed"] = True
+                        continue
+                    if enriched >= max_downloads:
+                        break
+                    path = os.path.join(MEDIA_DIR, "ubfix_%s_%s%s" % (channel, m.id, ext))
+                    if not (os.path.exists(path) and os.path.getsize(path) > 1000):
+                        try:
+                            client.download_media(target, file=path)
+                        except Exception as _de:
+                            logger.warning("[ub-enrich] @%s/%s: скачивание не удалось: %s",
+                                           channel, m.id, _de)
+                            if kind == "video":
+                                p["media_fetch_failed"] = True
+                            continue
+                    if not (os.path.exists(path) and os.path.getsize(path) > 1000):
+                        if kind == "video":
+                            p["media_fetch_failed"] = True
+                        continue
+                    p["media_files"] = [path]
+                    p["media_url"] = path
+                    p["media_type"] = mtype
+                    p.pop("media_fetch_failed", None)
+                    enriched += 1
+                    logger.info("[ub-enrich] @%s/%s: дозабрал %s (%d КБ)",
+                                channel, m.id, mtype, os.path.getsize(path) // 1024)
+        finally:
+            try:
+                import fcntl as _f
+                _f.flock(_lk, _f.LOCK_UN)
+            except Exception:
+                pass
+            _lk.close()
+    except Exception as e:
+        logger.warning("[ub-enrich] @%s: fail-open: %s", channel, e)
+    return enriched

@@ -211,6 +211,23 @@ def _cleanup_media(media_url: str | None, media_files: list | None, post_id: int
             logger.debug(f"Не удалось удалить {f}: {e}")
 
 
+_NBSP = " "
+
+
+def protect_numbered_lists(text: str) -> str:
+    """«1. текст» -> «1.<nbsp>текст» в начале строк (21.09).
+
+    MAX переразбивает тело по «. » и вырывает номер в отдельный абзац —
+    в «Дачном уголке» пост про базилик выехал ступенькой. Неразрывный
+    пробел визуально идентичен и не меняет длину (markup не съедет).
+    Трогаем ТОЛЬКО начало строки: «ст. л.» и «1 ст.» внутри текста целы."""
+    import re as _re
+    if not text:
+        return text
+    return _re.sub(r"(?m)^(\s{0,3}\d{1,2}[.)])[ 	]+(?=\S)",
+                   lambda m: m.group(1) + _NBSP, text)
+
+
 def _format_dacha_body(text: str) -> str:
     """Заголовок поста -> **жирный** + пустая строка перед телом (2026-07-26).
 
@@ -222,9 +239,9 @@ def _format_dacha_body(text: str) -> str:
         return text
     try:
         from news_realtime_engine import _to_markdown_with_bold_title
-        return _to_markdown_with_bold_title(text)
+        return protect_numbered_lists(_to_markdown_with_bold_title(text))
     except Exception:
-        return text
+        return protect_numbered_lists(text)
 
 
 def _apply_channel_signature(niche: str, channel_id: int, text: str) -> tuple[str, list | None, str | None]:

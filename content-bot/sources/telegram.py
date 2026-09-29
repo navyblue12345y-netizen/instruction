@@ -6,6 +6,7 @@ import hashlib
 import logging
 import os
 import re
+import threading
 
 import httpx
 
@@ -320,6 +321,14 @@ def fetch_channel(channel: str, max_posts: int = 10, max_pages: int = 1,
 _UB_SESSION_DEFAULT = "/home/openclaw/.openclaw/workspace/tg_userbot/ikigai_userbot"
 _UB_CHEF_ENV = "/home/openclaw/.openclaw/workspace/content-bot-client-chef/.env"
 _UB_FLOCK_TIMEOUT_SEC = 120
+# 26.09: вся работа с сессией (подключение, сообщения, скачивания) — под
+# жёстким сроком. 25.09 ~17:55 МСК подключение Telethon повисло без сети и
+# 19 часов держало flock ОБЩЕЙ сессии: встали ub-доноры ВиП/ШЕФ и сборщик
+# видео Красногорска, у ВиП план дня построился до 18:05.
+_UB_HARD_TIMEOUT_SEC = 180
+# Один поток процесса стоит в очереди на flock, остальные ждут здесь: 25.09
+# на flock висели 22 потока главного, и соседи бились за сессию с толпой.
+_UB_INPROC_LOCK = threading.Lock()
 _UB_MAX_FILE_BYTES = 48 * 1024 * 1024        # аудио: лимит MAX на вложение
 _UB_MAX_VIDEO_BYTES = 80 * 1024 * 1024       # видео: качаем крупнее — при заливке
                                              # публикатор сожмёт ffmpeg'ом (max_api._shrink)
@@ -397,83 +406,75 @@ def userbot_enrich_media(channel: str, posts: list, want_audio: bool = False,
         return 0
 
     os.makedirs(MEDIA_DIR, exist_ok=True)
-    enriched = 0
+    # 26.09: сначала внутренний замок процесса, потом flock; общий бюджет
+    # ожидания прежний (_UB_FLOCK_TIMEOUT_SEC).
+    import time as _time
+    wait_until = _time.monotonic() + _UB_FLOCK_TIMEOUT_SEC
+    if not _UB_INPROC_LOCK.acquire(timeout=_UB_FLOCK_TIMEOUT_SEC):
+        logger.warning("[ub-enrich] @%s: сессия юзербота занята — пропуск", channel)
+        return 0
+    try:
+        return _ub_enrich_locked(channel, todo, api_id, api_hash, max_downloads,
+                                 client_factory,
+                                 max(1.0, wait_until - _time.monotonic()))
+    finally:
+        _UB_INPROC_LOCK.release()
+
+
+def _ub_run_bounded(coro_factory, timeout_sec):
+    """Корутина сессии в СВОЁМ цикле событий под жёстким сроком.
+
+    По сроку задача отменяется (Telethon закрывает соединение в __aexit__),
+    на уборку ещё до 10 с, затем TimeoutError — поток не висит, и вызывающий
+    отпускает flock. Ждём через asyncio.wait, а не wait_for: wait_for ждёт
+    отменённую задачу до конца, и зависшая уборка снова повесила бы поток."""
+    import asyncio
+    loop = asyncio.new_event_loop()
+    try:
+        task = loop.create_task(coro_factory())
+        done, _ = loop.run_until_complete(asyncio.wait({task}, timeout=timeout_sec))
+        if task in done:
+            return task.result()
+        task.cancel()
+        try:
+            loop.run_until_complete(asyncio.wait({task}, timeout=10))
+        except Exception:
+            pass
+        raise TimeoutError("userbot session deadline")
+    finally:
+        try:
+            for _t in asyncio.all_tasks(loop):
+                _t.cancel()
+        except Exception:
+            pass
+        loop.close()
+
+
+def _ub_enrich_locked(channel, todo, api_id, api_hash, max_downloads, client_factory,
+                      flock_wait):
+    """flock общей сессии -> работа с сессией под сроком -> flock отпущен всегда."""
+    state = {"n": 0, "done": set()}
     try:
         import fcntl  # noqa: F401 — гарантируем POSIX
         _lk = open(_ub_session_path() + ".flock", "w")
         try:
-            _flock_or_timeout(_lk, _UB_FLOCK_TIMEOUT_SEC)
+            _flock_or_timeout(_lk, flock_wait)
         except TimeoutError:
             _lk.close()
             logger.warning("[ub-enrich] @%s: сессия юзербота занята — пропуск", channel)
             return 0
         try:
-            if client_factory is not None:
-                client = client_factory()
-            else:
-                from telethon.sync import TelegramClient
-                client = TelegramClient(_ub_session_path(), int(api_id), api_hash,
-                                        receive_updates=False)
-            with client:
-                msgs = client.get_messages(channel, ids=sorted(todo.keys()))
-                for m in msgs or []:
-                    if m is None or getattr(m, "id", None) not in todo:
-                        continue
-                    p, kind = todo[m.id]
-                    doc = getattr(m, "document", None)
-                    video = getattr(m, "video", None)
-                    audio = getattr(m, "audio", None) or getattr(m, "voice", None)
-                    target, ext, mtype = None, None, None
-                    _mime = ((getattr(doc, "mime_type", "") or "")).lower()
-                    _is_vid = video is not None or _mime.startswith("video/")
-                    if kind == "video" and (_is_vid or doc is not None):
-                        size = getattr(video or doc, "size", 0) or 0
-                        if size and size > _UB_MAX_VIDEO_BYTES:
-                            logger.info("[ub-enrich] @%s/%s: видео %d МБ > лимита — пропуск",
-                                        channel, m.id, size // 1048576)
-                            p["media_fetch_failed"] = True
-                            continue
-                        target, ext, mtype = m, ".mp4", "video"
-                    elif kind == "audio?" and audio is not None:
-                        size = getattr(audio, "size", 0) or 0
-                        if size and size > _UB_MAX_FILE_BYTES:
-                            continue
-                        mime = (getattr(audio, "mime_type", "") or "").lower()
-                        target, ext, mtype = m, _AUDIO_EXT.get(mime, ".mp3"), "audio"
-                    elif kind == "audio?" and _is_vid:
-                        # Благовещенск 16.09: «песни» оказались альбомом ВИДЕО
-                        # (video/mp4 61 МБ) — web-превью его вовсе не показало.
-                        size = getattr(video or doc, "size", 0) or 0
-                        if size and size > _UB_MAX_VIDEO_BYTES:
-                            continue
-                        target, ext, mtype = m, ".mp4", "video"
-                    if target is None:
-                        if kind == "video":
-                            p["media_fetch_failed"] = True
-                        continue
-                    if enriched >= max_downloads:
-                        break
-                    path = os.path.join(MEDIA_DIR, "ubfix_%s_%s%s" % (channel, m.id, ext))
-                    if not (os.path.exists(path) and os.path.getsize(path) > 1000):
-                        try:
-                            client.download_media(target, file=path)
-                        except Exception as _de:
-                            logger.warning("[ub-enrich] @%s/%s: скачивание не удалось: %s",
-                                           channel, m.id, _de)
-                            if kind == "video":
-                                p["media_fetch_failed"] = True
-                            continue
-                    if not (os.path.exists(path) and os.path.getsize(path) > 1000):
-                        if kind == "video":
-                            p["media_fetch_failed"] = True
-                        continue
-                    p["media_files"] = [path]
-                    p["media_url"] = path
-                    p["media_type"] = mtype
-                    p.pop("media_fetch_failed", None)
-                    enriched += 1
-                    logger.info("[ub-enrich] @%s/%s: дозабрал %s (%d КБ)",
-                                channel, m.id, mtype, os.path.getsize(path) // 1024)
+            _ub_run_bounded(
+                lambda: _ub_enrich_session(channel, todo, api_id, api_hash,
+                                           max_downloads, client_factory, state),
+                _UB_HARD_TIMEOUT_SEC)
+        except TimeoutError:
+            logger.warning("[ub-enrich] @%s: сессия не уложилась в %d с — прервал, "
+                           "сессию отпускаю", channel, _UB_HARD_TIMEOUT_SEC)
+            # видео не добыто — голым не постим (как при неудачной докачке)
+            for _mid, (_p, _kind) in todo.items():
+                if _kind == "video" and _mid not in state["done"]:
+                    _p["media_fetch_failed"] = True
         finally:
             try:
                 import fcntl as _f
@@ -483,4 +484,78 @@ def userbot_enrich_media(channel: str, posts: list, want_audio: bool = False,
             _lk.close()
     except Exception as e:
         logger.warning("[ub-enrich] @%s: fail-open: %s", channel, e)
-    return enriched
+    return state["n"]
+
+
+async def _ub_enrich_session(channel, todo, api_id, api_hash, max_downloads,
+                             client_factory, state):
+    """Один get_messages на канал + скачивания. Клиент создаётся внутри цикла
+    событий _ub_run_bounded — к нему он и привязан."""
+    if client_factory is not None:
+        client = client_factory()
+    else:
+        from telethon import TelegramClient
+        client = TelegramClient(_ub_session_path(), int(api_id), api_hash,
+                                receive_updates=False)
+    async with client:
+        msgs = await client.get_messages(channel, ids=sorted(todo.keys()))
+        for m in msgs or []:
+            if m is None or getattr(m, "id", None) not in todo:
+                continue
+            p, kind = todo[m.id]
+            doc = getattr(m, "document", None)
+            video = getattr(m, "video", None)
+            audio = getattr(m, "audio", None) or getattr(m, "voice", None)
+            target, ext, mtype = None, None, None
+            _mime = ((getattr(doc, "mime_type", "") or "")).lower()
+            _is_vid = video is not None or _mime.startswith("video/")
+            if kind == "video" and (_is_vid or doc is not None):
+                size = getattr(video or doc, "size", 0) or 0
+                if size and size > _UB_MAX_VIDEO_BYTES:
+                    logger.info("[ub-enrich] @%s/%s: видео %d МБ > лимита — пропуск",
+                                channel, m.id, size // 1048576)
+                    p["media_fetch_failed"] = True
+                    continue
+                target, ext, mtype = m, ".mp4", "video"
+            elif kind == "audio?" and audio is not None:
+                size = getattr(audio, "size", 0) or 0
+                if size and size > _UB_MAX_FILE_BYTES:
+                    continue
+                mime = (getattr(audio, "mime_type", "") or "").lower()
+                target, ext, mtype = m, _AUDIO_EXT.get(mime, ".mp3"), "audio"
+            elif kind == "audio?" and _is_vid:
+                # Благовещенск 16.09: «песни» оказались альбомом ВИДЕО
+                # (video/mp4 61 МБ) — web-превью его вовсе не показало.
+                size = getattr(video or doc, "size", 0) or 0
+                if size and size > _UB_MAX_VIDEO_BYTES:
+                    continue
+                target, ext, mtype = m, ".mp4", "video"
+            if target is None:
+                if kind == "video":
+                    p["media_fetch_failed"] = True
+                continue
+            if state["n"] >= max_downloads:
+                break
+            path = os.path.join(MEDIA_DIR, "ubfix_%s_%s%s" % (channel, m.id, ext))
+            if not (os.path.exists(path) and os.path.getsize(path) > 1000):
+                try:
+                    await client.download_media(target, file=path)
+                except Exception as _de:
+                    logger.warning("[ub-enrich] @%s/%s: скачивание не удалось: %s",
+                                   channel, m.id, _de)
+                    if kind == "video":
+                        p["media_fetch_failed"] = True
+                    continue
+            if not (os.path.exists(path) and os.path.getsize(path) > 1000):
+                if kind == "video":
+                    p["media_fetch_failed"] = True
+                continue
+            p["media_files"] = [path]
+            p["media_url"] = path
+            p["media_type"] = mtype
+            p.pop("media_fetch_failed", None)
+            state["n"] += 1
+            state["done"].add(m.id)
+            logger.info("[ub-enrich] @%s/%s: дозабрал %s (%d КБ)",
+                        channel, m.id, mtype, os.path.getsize(path) // 1024)
+    return state["n"]

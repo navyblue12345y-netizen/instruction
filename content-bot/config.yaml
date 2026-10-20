@@ -121,6 +121,12 @@ filters:
     - \bспециальн\w+\s+военн\w+\s+операц\w+\b
     - \bспецоперац\w*\b(?=[\s\S]{0,300}\b(?:вс[ру]|боев|нато|украин|армии|войс|минобор|минбор|ракет|танк|пехот|штурм|линия\s+соприкос|зона\s+сво)\w*)
     - \bугроз\w*\s+бпла
+    # 19.10: архивные подборки «этот день в прошлые годы / в истории» — не новости (Муром, newsvladimirru)
+    - 'в этот день в (прошлые|предыдущие) годы'
+    - '\b\d{1,2} (января|февраля|марта|апреля|мая|июня|июля|августа|сентября|октября|ноября|декабря) в (прошлые|предыдущие) годы'
+    - 'чем запомнилась эта дата'
+    - 'освежить их в памяти'
+    - '^.{0,100}этот день в истории'
   grids:
     Города России:
       block_marketplace: false
@@ -7432,3 +7438,260 @@ bpla_alerts:
 # 16.09: kanaly, gde postam bez media dobiraem vlozheniya userbotom (sources/telegram.py userbot_enrich_media)
 telegram_audio_enrich:
 - amurblg1
+# 19.10: регион города канала для куратора (preparer._channel_city → «Город (Регион)»). Агломерации парой.
+channel_regions:
+  abakan_i_khakasiya_v_max: Республика Хакасия
+  abakan_lajv_respublika_khakasiya: Республика Хакасия
+  achinsk_v_max: Красноярский край
+  almetevsk_v_max: Республика Татарстан
+  angarsk_v_max: Иркутская область
+  arkhangelsk_lajv_arkhangelskaya_oblast: Архангельская область
+  arkhangelsk_v_max: Архангельская область
+  armavir_v_max: Краснодарский край
+  artyom_v_max: Приморский край
+  arzamas_v_max: Нижегородская область
+  astrakhan_lajv: Астраханская область
+  astrakhan_v_max: Астраханская область
+  balakovo_v_max: Саратовская область
+  balashikha_lajv: Московская область и Москва
+  balashikha_v_max: Московская область и Москва
+  barnaul_lajv_altajskij_kraj: Алтайский край
+  barnaul_v_max: Алтайский край
+  batajsk_v_max: Ростовская область
+  belgorod_lajv_belgorodskaya_oblast: Белгородская область
+  belgorod_v_max: Белгородская область
+  berezniki_v_max: Пермский край
+  bijsk_v_max: Алтайский край
+  blagoveschensk_lajv: Амурская область
+  blagoveschensk_v_max: Амурская область
+  bratsk_v_max: Иркутская область
+  bryansk_lajv: Брянская область
+  bryansk_v_max: Брянская область
+  cheboksary_lajv: Чувашская Республика
+  cheboksary_v_max: Чувашская Республика
+  chelyabinsk_lajv: Челябинская область
+  chelyabinsk_v_max: Челябинская область
+  cherepovec_v_max: Вологодская область
+  cherkessk_v_max: Карачаево-Черкесская Республика
+  chita_lajv: Забайкальский край
+  chita_v_max: Забайкальский край
+  domodedovo_v_max: Московская область и Москва
+  doneck_v_max: Донецкая Народная Республика и Ростовская область
+  dzerzhinsk_v_max: Нижегородская область
+  ekaterinburg_lajv_sverdlovskaya_oblast: Свердловская область
+  ekaterinburg_v_max: Свердловская область
+  elec_v_max: Липецкая область
+  elektrostal_v_max: Московская область и Москва
+  elista_v_max: Республика Калмыкия
+  essentuki_v_max: Ставропольский край
+  gatchina_v_max: Ленинградская область и Санкт-Петербург
+  glazov_v_max: Удмуртская Республика
+  gubkin_v_max: Белгородская область
+  irkutsk_lajv_irkutskaya_oblast: Иркутская область
+  irkutsk_v_max: Иркутская область
+  ivanovo_lajv: Ивановская область
+  ivanovo_v_max: Ивановская область
+  izhevsk_lajv: Удмуртская Республика
+  izhevsk_v_max: Удмуртская Республика
+  joshkar_ola_lajv_respublika_marij_el: Республика Марий Эл
+  joshkar_ola_v_max: Республика Марий Эл
+  kaliningrad_laj: Калининградская область
+  kaliningrad_v_max: Калининградская область
+  kaluga_lajv_k: Калужская область
+  kaluga_v_max: Калужская область
+  kamensk_uralskij_lajv: Свердловская область
+  kamensk_uralskij_v_max: Свердловская область
+  kamyshin_v_max: Волгоградская область
+  kazan_lajv: Республика Татарстан
+  kazan_v_max: Республика Татарстан
+  kemerovo_lajv: Кемеровская область — Кузбасс
+  kemerovo_v_max: Кемеровская область — Кузбасс
+  khabarovsk_lajv_khabarovskij_kraj: Хабаровский край
+  khabarovsk_v_max: Хабаровский край
+  khanty_mansijsk_v_max: Ханты-Мансийский автономный округ — Югра
+  khimki_v_max: Московская область и Москва
+  kirov_lajv: Кировская область
+  kirov_v_max: Кировская область
+  kislovodsk_v_max: Ставропольский край
+  klimovsk_v_max: Московская область и Москва
+  kolomna_v_max: Московская область и Москва
+  komsomolsk_na_amure_v_max: Хабаровский край
+  kopejsk_v_max: Челябинская область
+  korolyov_v_max: Московская область и Москва
+  kostroma_lajv: Костромская область
+  kostroma_v_max: Костромская область
+  kovrov_v_max: Владимирская область
+  krasnodar_lajv: Краснодарский край
+  krasnodar_v_max: Краснодарский край
+  krasnogorsk_v_max: Московская область и Москва
+  krasnoyarsk_lajv_krasnoyarskij_kraj: Красноярский край
+  krasnoyarsk_v_max: Красноярский край
+  krym_lajv: Республика Крым и Севастополь
+  krym_v_max: Республика Крым и Севастополь
+  kurgan_lajv: Курганская область
+  kurgan_v_max: Курганская область
+  kursk_i_oblast_v_max: Курская область
+  kursk_lajv_kurskaya_oblast: Курская область
+  kyzyl_v_max: Республика Тыва
+  leninsk_kuzneckij_v_max: Кемеровская область — Кузбасс
+  lipeck_v_max: Липецкая область
+  lipetsk_lajv_lipetskaya_oblast: Липецкая область
+  lyubercy_v_max: Московская область и Москва
+  magnitogorsk_lajv: Челябинская область
+  magnitogorsk_v_max: Челябинская область
+  majkop_lajv_respublika_adygeya: Республика Адыгея
+  majkop_v_max: Республика Адыгея
+  mezhdurechensk_v_max: Кемеровская область — Кузбасс
+  miass_v_max: Челябинская область
+  mikhajlovsk_v_max: Ставропольский край
+  moskva_lajv_moskovskaya_oblast: Москва и Московская область
+  moskva_v_max: Москва и Московская область
+  murino_v_max: Ленинградская область и Санкт-Петербург
+  murmansk_lajv: Мурманская область
+  murmansk_v_max: Мурманская область
+  murom_v_max: Владимирская область
+  mytischi_v_max: Московская область и Москва
+  naberezhnye_cheln: Республика Татарстан
+  naberezhnye_chelny_v_max: Республика Татарстан
+  nakhodka_v_max: Приморский край
+  nalchik_lajv: Кабардино-Балкарская Республика
+  nalchik_v_max: Кабардино-Балкарская Республика
+  neftekamsk_v_max: Республика Башкортостан
+  nefteyugansk_v_max: Ханты-Мансийский автономный округ — Югра
+  nevinnomyssk_v_max: Ставропольский край
+  nizhnekamsk_lajv: Республика Татарстан
+  nizhnekamsk_v_max: Республика Татарстан
+  nizhnevartovsk_v_max: Ханты-Мансийский автономный округ — Югра
+  nizhnij_novgorod_lajv: Нижегородская область
+  nizhnij_novgorod_v_max: Нижегородская область
+  nizhnij_tagil_v_max: Свердловская область
+  noginsk_v_max: Московская область и Москва
+  norilsk_v_max: Красноярский край
+  novocheboksarsk_v_max: Чувашская Республика
+  novocherkassk_v_max: Ростовская область
+  novokujbyshevsk_v_max: Самарская область
+  novokuzneck_v_max: Кемеровская область — Кузбасс
+  novokuznetsk_lajv: Кемеровская область — Кузбасс
+  novomoskovsk_v_max: Тульская область
+  novorossijsk_lajv: Краснодарский край
+  novorossijsk_v_max: Краснодарский край
+  novosibirsk_lajv_novosibirskaya_oblast: Новосибирская область
+  novosibirsk_v_max: Новосибирская область
+  novyj_urengoj_v_max: Ямало-Ненецкий автономный округ
+  noyabrsk_v_max: Ямало-Ненецкий автономный округ
+  obninsk_v_max: Калужская область
+  odincovo_v_max: Московская область и Москва
+  oktyabrskij_v_max: Республика Башкортостан
+  omsk_lajv_omskaya_oblast: Омская область
+  omsk_v_max: Омская область
+  orekhovo_zuevo_v_max: Московская область и Москва
+  orel_v_max: Орловская область
+  orenburg_lajv: Оренбургская область
+  orenburg_v_max: Оренбургская область
+  orsk_lajv: Оренбургская область
+  orsk_v_max: Оренбургская область
+  oryol_lajv: Орловская область
+  penza_i_oblast_v_max: Пензенская область
+  penza_lajv_penzenskaya_oblast: Пензенская область
+  perm_lajv_permskij_kraj: Пермский край
+  perm_v_max: Пермский край
+  pervouralsk_v_max: Свердловская область
+  petropavlovsk_kamchatskij_v_max: Камчатский край
+  petrozavodsk_la: Республика Карелия
+  petrozavodsk_v_max: Республика Карелия
+  podolsk_lajv: Московская область и Москва
+  podolsk_v_max: Московская область и Москва
+  prokopevsk_v_max: Кемеровская область — Кузбасс
+  pskov_lajv_pskovskaya_oblast: Псковская область
+  pskov_v_max: Псковская область
+  pushkino_v_max: Московская область и Москва
+  pyatigorsk_v_max: Ставропольский край
+  ramenskoe_v_max: Московская область и Москва
+  reutov_v_max: Московская область и Москва
+  rostov_na_donu_2: Ростовская область
+  rostov_na_donu_v_max: Ростовская область
+  rubcovsk_v_max: Алтайский край
+  ryazan_lajv: Рязанская область
+  ryazan_v_max: Рязанская область
+  rybinsk_v_max: Ярославская область
+  salavat_v_max: Республика Башкортостан
+  samara_lajv: Самарская область
+  samara_v_max: Самарская область
+  sankt_peterburg_lajv_leningradskaya_obla: Санкт-Петербург и Ленинградская область
+  sankt_peterburg_v_max: Санкт-Петербург и Ленинградская область
+  saransk_lajv: Республика Мордовия
+  saransk_v_max: Республика Мордовия
+  sarapul_v_max: Удмуртская Республика
+  saratov_i_engels_lajv: Саратовская область
+  saratov_i_engels_v_max: Саратовская область
+  sarov_v_max: Нижегородская область
+  schyolkovo_v_max: Московская область и Москва
+  sergiev_posad_v_max: Московская область и Москва
+  serpukhov_v_max: Московская область и Москва
+  sevastopol_laj: Севастополь и Республика Крым
+  sevastopol_v_max: Севастополь и Республика Крым
+  severodvinsk_v_max: Архангельская область
+  seversk_v_max: Томская область
+  shakhty_v_max: Ростовская область
+  sochi_lajv: Краснодарский край
+  sochi_v_max: Краснодарский край
+  staryj_oskol_v_max: Белгородская область
+  stavropol_lajv: Ставропольский край
+  stavropol_v_max: Ставропольский край
+  sterlitamak_v_max: Республика Башкортостан
+  surgut_lajv: Ханты-Мансийский автономный округ — Югра
+  surgut_v_max: Ханты-Мансийский автономный округ — Югра
+  syktyvkar_lajv_respublika_komi: Республика Коми
+  syktyvkar_v_max: Республика Коми
+  syzran_v_max: Самарская область
+  taganrog_lajv: Ростовская область
+  taganrog_v_max: Ростовская область
+  tambov_lajv_tambovskaya_oblast: Тамбовская область
+  tambov_v_max: Тамбовская область
+  tobolsk_v_max: Тюменская область
+  tolyatti_lajv: Самарская область
+  tolyatti_v_max: Самарская область
+  tomsk_lajv_tomskaya_oblast: Томская область
+  tomsk_v_max: Томская область
+  tula_lajv_tulskaya_oblast: Тульская область
+  tula_v_max: Тульская область
+  tver_i_oblast_v_max: Тверская область
+  tver_lajv_tverskaya_oblast: Тверская область
+  tyumen_lajv_tyumenskaya_oblast: Тюменская область
+  tyumen_v_max: Тюменская область
+  ufa_lajv: Республика Башкортостан
+  ufa_v_max: Республика Башкортостан
+  ulan_ude_lajv: Республика Бурятия
+  ulan_ude_v_max: Республика Бурятия
+  ulyanovsk_lajv_ulyanovskaya_oblast: Ульяновская область
+  ulyanovsk_v_max: Ульяновская область
+  ussurijsk_v_max: Приморский край
+  velikie_luki_v_max: Псковская область
+  velikij_novgorod_lajv: Новгородская область
+  velikij_novgorod_v_max: Новгородская область
+  vidnoe_v_max: Московская область и Москва
+  vladikavkaz_lajv: Республика Северная Осетия — Алания
+  vladikavkaz_v_max: Республика Северная Осетия — Алания
+  vladimir_lajv: Владимирская область
+  vladimir_v_max: Владимирская область
+  vladivostok_lajv: Приморский край
+  vladivostok_v_max: Приморский край
+  volgodonsk_v_max: Ростовская область
+  volgograd_lajv_volgogradskaya_oblast: Волгоградская область
+  volgograd_v_max: Волгоградская область
+  vologda_lajv_vologodskaya_oblast: Вологодская область
+  vologda_v_max: Вологодская область
+  volzhskij_lajv: Волгоградская область
+  volzhskij_v_max: Волгоградская область
+  voronezh_lajv: Воронежская область
+  voronezh_v_max: Воронежская область
+  votkinsk_v_max: Удмуртская Республика
+  yakutsk_lajv: Республика Саха (Якутия)
+  yakutsk_v_max: Республика Саха (Якутия)
+  yaroslavl_lajv: Ярославская область
+  yaroslavl_v_max: Ярославская область
+  yuzhno_sakhalinsk_v_max: Сахалинская область
+  zelenodolsk_v_max: Республика Татарстан
+  zheleznogorsk_v_max: Курская область
+  zhukovskij_v_max: Московская область и Москва
+  zlatoust_v_max: Челябинская область

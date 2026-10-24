@@ -6892,6 +6892,9 @@ disabled_channels:
 - moda
 - vyazanie
 - dom
+- masterskaya_vyaza_2
+- dachniki_2
+- dom_povara_2
 anthropic:
   api_key: ''
 news_realtime:

@@ -7695,3 +7695,41 @@ channel_regions:
   zheleznogorsk_v_max: Курская область
   zhukovskij_v_max: Московская область и Москва
   zlatoust_v_max: Челябинская область
+
+# 25.10: «чужие» источники каналов — в самый низкий приоритет, НЕ отключены (юзер: «если вдруг новостей не будет,
+# чтобы из них можно было взять»). Подстроки source_id; preparer._low_patterns читает живой конфиг — правка без
+# перезапуска. Гео-аудит 25.10 (sim_dates/geo_audit_1025.py): источник другого региона, своих новостей каналу не даёт.
+low_priority_sources:
+  # kavkaz.mk.ru — почти всё Ставрополье (у Ставрополя, Пятигорска, Кисловодска, Ессентуков, Невинномысска, Михайловска — свой)
+  cherkessk_v_max: [kavkaz.mk.ru]
+  elista_v_max: [kavkaz.mk.ru]
+  majkop_v_max: [kavkaz.mk.ru]
+  majkop_lajv_respublika_adygeya: [kavkaz.mk.ru]
+  vladikavkaz_v_max: [kavkaz.mk.ru]
+  vladikavkaz_lajv: [kavkaz.mk.ru]
+  # + chpvladik — «ЧП Владикавказ» (Северная Осетия)
+  nalchik_v_max: [kavkaz.mk.ru, chpvladik]
+  nalchik_lajv: [kavkaz.mk.ru, chpvladik]
+  # chr.mk.ru — по содержанию курское СМИ (у Курска и Железногорска — свой)
+  belgorod_lajv_belgorodskaya_oblast: [chr.mk.ru]
+  belgorod_v_max: [chr.mk.ru]
+  gubkin_v_max: [chr.mk.ru]
+  staryj_oskol_v_max: [chr.mk.ru]
+  lipetsk_lajv_lipetskaya_oblast: [chr.mk.ru]
+  lipeck_v_max: [chr.mk.ru]
+  elec_v_max: [chr.mk.ru]
+  oryol_lajv: [chr.mk.ru]
+  orel_v_max: [chr.mk.ru]
+  # Хабаровский край у приморских городов
+  nakhodka_v_max: [svodka_khv, hab.kp.ru, hab.aif.ru, komsagram, komcitynews]
+  ussurijsk_v_max: [svodka_khv, hab.kp.ru, hab.aif.ru, komsagram, komcitynews]
+  # Сахалин у Камчатки
+  petropavlovsk_kamchatskij_v_max: [sakhalin.aif.ru, mk-sakhalin.ru, sakhalin.kp.media, tochka_65, sakhonline, echosakh]
+  # Уфа у Нефтеюганска (Югра; путаница с Нефтекамском)
+  nefteyugansk_v_max: [ufa.mk.ru, ufa.rbc.ru, ufa_rb, ufa_smi]
+  # Челябинск у Нижнего Тагила (Свердловская) и Новокузнецка (Кузбасс)
+  nizhnij_tagil_v_max: [chel.mk.ru]
+  novokuzneck_v_max: [chel.mk.ru]
+  novokuznetsk_lajv: [chel.mk.ru]
+  # Подмосковье у нижегородского Дзержинска
+  dzerzhinsk_v_max: [myluber, dzerzhinskiy_mos]
